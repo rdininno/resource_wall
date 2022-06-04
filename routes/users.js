@@ -38,7 +38,7 @@ module.exports = (db) => {
       });
   });
 
-  // Post - User with ID
+  // Post -  Edit User with ID
   router.post("/:id", (req, res) => {
     const id = req.params.id;
     const username = req.params.username;
