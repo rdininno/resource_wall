@@ -13,8 +13,28 @@
   <script type="text/javascript" src="/scripts/app.js"></script>
 </head>
 
+
+
 <body>
-  <h1>Have fun! 🥔</h1>
+  <%- include('partials/_header') %>
+    <main>
+      <div class="home_second_nav">
+        <button class="my_resources_button">My resources</button>
+        <button class="my_favourites_button">My favourites</button>
+      </div>
+
+      <section id="resource_section">
+        <hl>My Resources</hl>
+        <div class="home_display_container">
+          resources go here
+        </div>
+
+        <hl>My Favourites</hl>
+        <div class="home_display_container">
+          favourites go here
+        </div>
+      </section>
+    </main>
 </body>
 
 </html>
