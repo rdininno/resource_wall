@@ -5,6 +5,8 @@
  * See: https://expressjs.com/en/guide/using-middleware.html#middleware.router
  */
 
+// We may need to  change the req.params to req.session in future
+
 const express = require("express");
 const router = express.Router();
 
@@ -23,8 +25,9 @@ module.exports = (db) => {
 
   // Get - users with ID
   router.get("/:id", (req, res) => {
-    //Need to find a way to get id from url or req
-    db.query(`SELECT * FROM users where id = ${id}`)
+    const id = req.params.id;
+    //Need to find a way to get 'id' from url or req
+    db.query(`SELECT * FROM users where id = ${id};`)
       .then((data) => {
         const user = data.rows;
         // Received Data and pass as object "user"
@@ -37,6 +40,10 @@ module.exports = (db) => {
 
   // Post - User with ID
   router.post("/:id", (req, res) => {
+    const id = req.params.id;
+    const username = req.params.username;
+    const password = req.params.password;
+    const email = req.params.email;
     // Need to identify which column need to update
     // and grab info from url or req
     db.query(
