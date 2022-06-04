@@ -52,7 +52,7 @@ module.exports = (db) => {
 
     // update table
     db.query(
-      `UPDATE rating 
+      `UPDATE reviews 
         SET user_id = ${user_id}, 
         resource_id = ${resource_id},
         comment = ${comment},
