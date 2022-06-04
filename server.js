@@ -41,6 +41,8 @@ const widgetsRoutes = require("./routes/widgets");
 // The New Routes for Favorites and Resources
 const resourcesRoutes = require("./routes/resources");
 const favouritesRoutes = require("./routes/favourites");
+const reviewsRoutes = require("./routes/reviews");
+const tagRoutes = require("./routes/tags");
 
 // Mount all resource routes
 // Note: Feel free to replace the example routes below with your own
