@@ -5,30 +5,31 @@ const express = require("express");
 const router = express.Router();
 
 module.exports = (db) => {
-  // Get - favourite with 'id'
+  // Get - tag with 'id'
   router.get("/:id", (req, res) => {
     const id = req.params.id;
-    db.query(`SELECT * FROM favourites WHERE id = ${id};`)
+    db.query(`SELECT * FROM tags WHERE id = ${id};`)
       .then((data) => {
-        const favourite = data.rows; // will return array of object
+        const tag = data.rows; // will return array of object
         // res.json({ resources });
-        console.log(favourite);
+        console.log(tag);
       })
       .catch((err) => {
         res.status(500).json({ error: err.message });
       });
   });
 
-  // Post - ADD favourite
+  // Post - ADD tag
   router.post("/", (req, res) => {
     // need to find out how grab data from req
     const user_id = req.params.id;
     const resource_id = req.params.resource_id;
+    const tag = req.params.tag;
 
     // insert table
     db.query(
-      `INSERT INTO favourites (user_id, resource_id) 
-              VALUES (${user_id}, ${resource_id});`
+      `INSERT INTO tag (user_id, resource_id, tag) 
+              VALUES (${user_id}, ${resource_id}, ${tag});`
     )
       .then((data) => {
         console.log(data.rows);
@@ -38,12 +39,35 @@ module.exports = (db) => {
       });
   });
 
-  // Post - Delete favourite
+  // Post - Edit tag
+
+  router.post("/:id", (req, res) => {
+    // and how to grab all data from req
+    const id = req.params.id;
+    const user_id = req.params.user_id;
+    const tag = req.params.tag;
+
+    // update table
+    db.query(
+      `UPDATE tags 
+      SET user_id = ${user_id}, 
+      tag = ${tag}
+    WHERE id = ${id};`
+    )
+      .then((data) => {
+        console.log(data.rows);
+      })
+      .catch((err) => {
+        res.status(500).json({ error: err.message });
+      });
+  });
+
+  // Post - Delete tag
   router.post("/:id/delete", (req, res) => {
     const id = req.params.id;
     //delete query
     db.query(
-      `DELETE FROM favourite 
+      `DELETE FROM tags 
               WHERE id = ${id}`
     )
       .then((data) => {
