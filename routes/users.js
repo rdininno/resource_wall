@@ -13,10 +13,15 @@ const router = express.Router();
 module.exports = (db) => {
   // Get - users
   router.get("/", (req, res) => {
+    //send response
+    res.send("hello users");
+    console.log(`hello from Users: id ${id}`);
+
     db.query(`SELECT * FROM users;`)
       .then((data) => {
         const users = data.rows;
-        res.json({ users });
+
+        // res.json({ users });
       })
       .catch((err) => {
         res.status(500).json({ error: err.message });
@@ -26,6 +31,7 @@ module.exports = (db) => {
   // Get - users with ID
   router.get("/:id", (req, res) => {
     const id = req.params.id;
+    res.send(`hello ${id}`);
     //Need to find a way to get 'id' from url or req
     db.query(`SELECT * FROM users where id = ${id};`)
       .then((data) => {

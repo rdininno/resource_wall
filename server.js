@@ -35,20 +35,26 @@ app.use(express.static("public"));
 
 // Separated Routes for each Resource
 // Note: Feel free to replace the example routes below with your own
-const usersRoutes = require("./routes/users");
+const usersRoutes = require("./routes/users.js");
 const widgetsRoutes = require("./routes/widgets");
 
-// The New Routes for Favorites and Resources
-const resourcesRoutes = require("./routes/resources");
-const favouritesRoutes = require("./routes/favourites");
-const reviewsRoutes = require("./routes/reviews");
-const tagRoutes = require("./routes/tags");
+// The New Routes for Favorites, Resources, Reviews and tags
+const resourcesRoutes = require("./routes/resources.js");
+const favouritesRoutes = require("./routes/favourites.js");
+const reviewsRoutes = require("./routes/reviews.js");
+const tagRoutes = require("./routes/tags.js");
 
 // Mount all resource routes
 // Note: Feel free to replace the example routes below with your own
-app.use("/api/users", usersRoutes(db));
+app.use("/users", usersRoutes(db));
 app.use("/api/widgets", widgetsRoutes(db));
 // Note: mount other resources here, using the same pattern above
+
+// Mount the New resource routes
+app.use("/reviews", reviewsRoutes(db));
+app.use("/resources", resourcesRoutes(db));
+app.use("/favourites", favouritesRoutes(db));
+app.use("/tags", tagRoutes(db));
 
 // Home page
 // Warning: avoid creating more routes in this file!

@@ -8,6 +8,10 @@ module.exports = (db) => {
   // Get - tag with 'id'
   router.get("/:id", (req, res) => {
     const id = req.params.id;
+    // send res for testing
+    res.send(`hello: id ${id}`);
+    console.log(`hello from Tags: id ${id}`);
+
     db.query(`SELECT * FROM tags WHERE id = ${id};`)
       .then((data) => {
         const tag = data.rows; // will return array of object

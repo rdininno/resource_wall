@@ -8,10 +8,15 @@ module.exports = (db) => {
   // Get - resources with 'id'
   router.get("/:id", (req, res) => {
     const id = req.params.id;
+    //send res for testing
+    res.send(`hello: id ${id}`);
+    console.log(`hello from resources: id ${id}`);
+
     db.query(`SELECT * FROM resources WHERE id = ${id};`)
       .then((data) => {
-        const resources = data.rows; // will return array of object
-        res.json({ resources });
+        const resource = data.rows; // will return array of object
+
+        console.log(resource);
       })
       .catch((err) => {
         res.status(500).json({ error: err.message });
