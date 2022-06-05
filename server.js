@@ -34,17 +34,17 @@ app.use(
 app.use(express.static("public"));
 
 // const widgetsRoutes = require("./routes/widgets");
+// app.use("/api/widgets", widgetsRoutes(db));
 
 //Routes for Favorites, Resources, Reviews and tags
-
+// I keep some route in case will need it for the ajax call in future
 const usersRoutes = require("./routes/users.js");
 const resourcesRoutes = require("./routes/resources.js");
 const favouritesRoutes = require("./routes/favourites.js");
 const reviewsRoutes = require("./routes/reviews.js");
 const tagRoutes = require("./routes/tags.js");
 
-// app.use("/api/widgets", widgetsRoutes(db));
-
+// call route file
 app.use("/users", usersRoutes(db));
 app.use("/resources", resourcesRoutes(db));
 
@@ -52,13 +52,15 @@ app.use("/resources", resourcesRoutes(db));
 app.use("/favouritess", favouritesRoutes(db));
 
 // Home page
+// After discuss will move below two route to routes folder
+// Need to make sure what data pass to server and what is the response
 
-// Direct to index page
+// Direct/render to index page
 app.get("/", (req, res) => {
   res.render("index");
 });
 
-// Direct to Explore page
+// Direct/render to Explore page
 app.get("/explore", (req, res) => {
   res.render("explore");
 });

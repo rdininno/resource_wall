@@ -5,24 +5,6 @@ const express = require("express");
 const router = express.Router();
 
 module.exports = (db) => {
-  // Get - favourite with 'id'
-  router.get("/:id", (req, res) => {
-    const id = req.params.id;
-    // send res for testing
-    res.send(`hello: id ${id}`);
-    console.log(`hello from Favourites: id ${id}`);
-
-    db.query(`SELECT * FROM favourites WHERE id = ${id};`)
-      .then((data) => {
-        const favourite = data.rows; // will return array of object
-        // res.json({ resources });
-        console.log(favourite);
-      })
-      .catch((err) => {
-        res.status(500).json({ error: err.message });
-      });
-  });
-
   // Post - ADD favourite
   router.post("/", (req, res) => {
     // need to find out how grab data from req

@@ -1,10 +1,3 @@
-/*
- * All routes for Users are defined here
- * Since this file is loaded in server.js into api/users,
- *   these routes are mounted onto /users
- * See: https://expressjs.com/en/guide/using-middleware.html#middleware.router
- */
-
 // We may need to  change the req.params to req.session in future
 
 const express = require("express");
@@ -17,7 +10,7 @@ module.exports = (db) => {
     res.send("hello users");
     console.log(`hello from User main`);
     //Get everything from users
-    db.query(`SELECT * FROM users;`)
+    db.query(``)
       .then((data) => {
         console.log(data.rows);
       })
@@ -30,8 +23,8 @@ module.exports = (db) => {
   router.get("/:id", (req, res) => {
     const id = req.params.id;
     res.send(`hello ${id}`);
-    //Need to find a way to get 'id' from url or req
-    db.query(`SELECT * FROM users where id = ${id};`)
+
+    db.query(``)
       .then((data) => {
         // Received Data and pass as object "user"
         console.log(data.rows);
@@ -43,19 +36,9 @@ module.exports = (db) => {
 
   // Post -  Edit User with ID
   router.post("/:id", (req, res) => {
-    const id = req.params.id;
-    const username = req.params.username;
-    const password = req.params.password;
-    const email = req.params.email;
-    // Need to identify which column need to update
-    // and grab info from url or req
-    db.query(
-      `UPDATE users 
-      SET username = ${username}, 
-      email = ${email}, 
-      password=${password}
-      WHERE id = ${id};`
-    )
+    // const something = something
+
+    db.query(``)
       .then((data) => {
         console.log("Update", data.rows);
       })

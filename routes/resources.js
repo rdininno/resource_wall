@@ -12,7 +12,7 @@ module.exports = (db) => {
     res.send(`hello: id ${id}`);
     console.log(`hello from resources: id ${id}`);
 
-    db.query(`SELECT * FROM resources WHERE id = ${id};`)
+    db.query(``)
       .then((data) => {
         const resource = data.rows;
 
@@ -26,17 +26,29 @@ module.exports = (db) => {
   // Post - ADD resource
   router.post("/", (req, res) => {
     // need to find out how grab data from req
-    const user_id = req.params.id;
-    const title = req.params.title;
-    const description = req.params.description;
-    const url = req.params.url;
-    const tag = req.params.tag;
+
+    // const something = something
 
     // insert table
     db.query(
       `INSERT INTO resource (user_id, title, description, url, tag) 
               VALUES (${user_id}, ${title}, ${description}, ${url},${tag});`
     )
+      .then((data) => {
+        console.log(data.rows);
+      })
+      .catch((err) => {
+        res.status(500).json({ error: err.message });
+      });
+  });
+
+  // Post Edit resource
+  router.post("/:id", (req, res) => {
+    //Which part of resource need to update
+    // and how to grab all data from req
+
+    // update table
+    db.query(``)
       .then((data) => {
         console.log(data.rows);
       })
@@ -55,35 +67,6 @@ module.exports = (db) => {
     )
       .then((data) => {
         console.log("delete success");
-      })
-      .catch((err) => {
-        res.status(500).json({ error: err.message });
-      });
-  });
-
-  // Post Edit resource
-  router.post("/:id", (req, res) => {
-    //Which part of resource need to update
-    // and how to grab all data from req
-    const id = req.params.id;
-    const user_id = req.params.user_id;
-    const title = req.params.title;
-    const description = req.params.description;
-    const url = req.params.url;
-    const tag = req.params.tag;
-
-    // update table
-    db.query(
-      `UPDATE resources 
-        SET user_id = ${user_id}, 
-        title = ${title}, 
-        description = ${description}, 
-        url = ${url}, 
-        tag = ${tag}
-      WHERE id = ${id};`
-    )
-      .then((data) => {
-        console.log(data.rows);
       })
       .catch((err) => {
         res.status(500).json({ error: err.message });
