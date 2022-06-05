@@ -13,8 +13,48 @@
   <script type="text/javascript" src="/scripts/app.js"></script>
 </head>
 
+
+
 <body>
-  <h1>Have fun! 🥔</h1>
+  <%- include('partials/_header') %>
+    <main>
+      <div class="home_second_nav">
+        <button class="my_resources_button">My resources</button>
+        <button class="my_favourites_button">My favourites</button>
+      </div>
+
+      <section id="resource_section">
+        <hl>My Resources</hl>
+        <div class="resource_display_container">
+          <article class="resourceContainer">
+
+            <body>
+
+              <div class="thumbnailContainer">
+                <img class="resourceThumbnail" src="https://imgur.com/aWZvRbG.png">
+              </div>
+
+              <div class="resourceInfo">
+                <h2 class="resourceTitle">RESOURCE TITLE</h2>
+                <div class="resourceDescription">This would be where the description goes for the resource</div>
+
+                <div class="resourceFooter">
+                  <p class="resourceDate">CREATED AT DATE</p>
+                  <div class="resourceIcons">
+                    <i class="fa-solid fa-heart"></i>
+                    <i class="fa-solid fa-comment"></i>
+                    <i class="fa-solid fa-star-sharp"></i>
+                   </div>
+
+                </div>
+              </div>
+
+            </body>
+          </article>
+        </div>
+      </section>
+    </main>
 </body>
 
 </html>
+
