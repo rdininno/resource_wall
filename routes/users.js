@@ -15,13 +15,11 @@ module.exports = (db) => {
   router.get("/", (req, res) => {
     //send response
     res.send("hello users");
-    console.log(`hello from Users: id ${id}`);
-
+    console.log(`hello from User main`);
+    //Get everything from users
     db.query(`SELECT * FROM users;`)
       .then((data) => {
-        const users = data.rows;
-
-        // res.json({ users });
+        console.log(data.rows);
       })
       .catch((err) => {
         res.status(500).json({ error: err.message });
@@ -35,9 +33,8 @@ module.exports = (db) => {
     //Need to find a way to get 'id' from url or req
     db.query(`SELECT * FROM users where id = ${id};`)
       .then((data) => {
-        const user = data.rows;
         // Received Data and pass as object "user"
-        res.json({ user });
+        console.log(data.rows);
       })
       .catch((err) => {
         res.status(500).json({ error: err.message });

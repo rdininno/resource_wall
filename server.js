@@ -33,35 +33,34 @@ app.use(
 
 app.use(express.static("public"));
 
-// Separated Routes for each Resource
-// Note: Feel free to replace the example routes below with your own
-const usersRoutes = require("./routes/users.js");
-const widgetsRoutes = require("./routes/widgets");
+// const widgetsRoutes = require("./routes/widgets");
 
-// The New Routes for Favorites, Resources, Reviews and tags
+//Routes for Favorites, Resources, Reviews and tags
+
+const usersRoutes = require("./routes/users.js");
 const resourcesRoutes = require("./routes/resources.js");
 const favouritesRoutes = require("./routes/favourites.js");
 const reviewsRoutes = require("./routes/reviews.js");
 const tagRoutes = require("./routes/tags.js");
 
-// Mount all resource routes
-// Note: Feel free to replace the example routes below with your own
-app.use("/users", usersRoutes(db));
-app.use("/api/widgets", widgetsRoutes(db));
-// Note: mount other resources here, using the same pattern above
+// app.use("/api/widgets", widgetsRoutes(db));
 
-// Mount the New resource routes
-app.use("/reviews", reviewsRoutes(db));
+app.use("/users", usersRoutes(db));
 app.use("/resources", resourcesRoutes(db));
-app.use("/favourites", favouritesRoutes(db));
-app.use("/tags", tagRoutes(db));
+
+// Need to confirm
+app.use("/favouritess", favouritesRoutes(db));
 
 // Home page
-// Warning: avoid creating more routes in this file!
-// Separate them into separate routes files (see above).
 
+// Direct to index page
 app.get("/", (req, res) => {
   res.render("index");
+});
+
+// Direct to Explore page
+app.get("/explore", (req, res) => {
+  res.render("explore");
 });
 
 app.listen(PORT, () => {

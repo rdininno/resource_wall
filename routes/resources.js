@@ -14,7 +14,7 @@ module.exports = (db) => {
 
     db.query(`SELECT * FROM resources WHERE id = ${id};`)
       .then((data) => {
-        const resource = data.rows; // will return array of object
+        const resource = data.rows;
 
         console.log(resource);
       })
@@ -45,6 +45,22 @@ module.exports = (db) => {
       });
   });
 
+  // Post - Delete resource
+  router.post("/:id/delete", (req, res) => {
+    const id = req.params.id;
+    //delete query
+    db.query(
+      `DELETE FROM resources 
+            WHERE id = ${id}`
+    )
+      .then((data) => {
+        console.log("delete success");
+      })
+      .catch((err) => {
+        res.status(500).json({ error: err.message });
+      });
+  });
+
   // Post Edit resource
   router.post("/:id", (req, res) => {
     //Which part of resource need to update
@@ -68,22 +84,6 @@ module.exports = (db) => {
     )
       .then((data) => {
         console.log(data.rows);
-      })
-      .catch((err) => {
-        res.status(500).json({ error: err.message });
-      });
-  });
-
-  // Post - Delete resource
-  router.post("/:id/delete", (req, res) => {
-    const id = req.params.id;
-    //delete query
-    db.query(
-      `DELETE FROM resources 
-              WHERE id = ${id}`
-    )
-      .then((data) => {
-        console.log("delete success");
       })
       .catch((err) => {
         res.status(500).json({ error: err.message });
