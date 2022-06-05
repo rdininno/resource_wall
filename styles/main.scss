@@ -39,3 +39,31 @@ main {
   border: 1px solid black;
   padding: 10px;
 }
+
+.resourceContainer {
+  display: flex;
+  margin: 20px 0px;
+  width: 100%;
+}
+
+.resourceThumbnail {
+  width: 200px;
+  margin: 10px;
+}
+
+.resourceInfo {
+  display: flex;
+  flex-direction: column;
+  margin-left: 20px;
+  width: 100%;
+}
+
+.resourceDate {
+  font-size: 12px;
+}
+
+.resourceFooter {
+  display: flex;
+  flex-direction: row;
+}
+
