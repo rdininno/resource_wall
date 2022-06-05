@@ -41,8 +41,6 @@ app.use(express.static("public"));
 const usersRoutes = require("./routes/users.js");
 const resourcesRoutes = require("./routes/resources.js");
 const favouritesRoutes = require("./routes/favourites.js");
-const reviewsRoutes = require("./routes/reviews.js");
-const tagRoutes = require("./routes/tags.js");
 
 // call route file
 app.use("/users", usersRoutes(db));

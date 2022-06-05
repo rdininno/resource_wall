@@ -1,5 +1,4 @@
-// We may need change the req.params to req.session in future
-// Need to connect to tag table
+// We may not need this route
 
 const express = require("express");
 const router = express.Router();
