@@ -41,6 +41,7 @@ const dataRoutes = require("./routes/databaseRoutes.js");
 app.use("/api/explore", dataRoutes(db));
 
 
+
 //Routes for Favorites, Resources, Reviews and tags
 // I keep some route in case will need it for the ajax call in future
 const usersRoutes = require("./routes/users.js");
@@ -62,9 +63,6 @@ app.use("/favourites", favouritesRoutes(db));
 // Direct/render to index page
 app.get("/", (req, res) => {
   res.render("index");
-});
-app.get("/databases", (req, res) => {
-  console.log("database", req);
 });
 
 app.listen(PORT, () => {
