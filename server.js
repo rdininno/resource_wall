@@ -41,6 +41,7 @@ app.use(express.static("public"));
 const usersRoutes = require("./routes/users.js");
 const resourcesRoutes = require("./routes/resources.js");
 const favouritesRoutes = require("./routes/favourites.js");
+const explore = require("./routes/explore.js");
 
 // call route file
 app.use("/users", usersRoutes(db));
@@ -56,11 +57,6 @@ app.use("/favouritess", favouritesRoutes(db));
 // Direct/render to index page
 app.get("/", (req, res) => {
   res.render("index");
-});
-
-// Direct/render to Explore page
-app.get("/explore", (req, res) => {
-  res.render("explore");
 });
 
 app.listen(PORT, () => {
