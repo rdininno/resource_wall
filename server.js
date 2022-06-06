@@ -33,21 +33,28 @@ app.use(
 
 app.use(express.static("public"));
 
-// Separated Routes for each Resource
-// Note: Feel free to replace the example routes below with your own
-const usersRoutes = require("./routes/users");
-const widgetsRoutes = require("./routes/widgets");
+// const widgetsRoutes = require("./routes/widgets");
+// app.use("/api/widgets", widgetsRoutes(db));
 
-// Mount all resource routes
-// Note: Feel free to replace the example routes below with your own
-app.use("/api/users", usersRoutes(db));
-app.use("/api/widgets", widgetsRoutes(db));
-// Note: mount other resources here, using the same pattern above
+//Routes for Favorites, Resources, Reviews and tags
+// I keep some route in case will need it for the ajax call in future
+const usersRoutes = require("./routes/users.js");
+const resourcesRoutes = require("./routes/resources.js");
+const favouritesRoutes = require("./routes/favourites.js");
+const explore = require("./routes/explore.js");
+
+// call route file
+app.use("/users", usersRoutes(db));
+app.use("/resources", resourcesRoutes(db));
+
+// Need to confirm
+app.use("/favouritess", favouritesRoutes(db));
 
 // Home page
-// Warning: avoid creating more routes in this file!
-// Separate them into separate routes files (see above).
+// After discuss will move below two route to routes folder
+// Need to make sure what data pass to server and what is the response
 
+// Direct/render to index page
 app.get("/", (req, res) => {
   res.render("index");
 });

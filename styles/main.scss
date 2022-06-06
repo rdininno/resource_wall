@@ -1,17 +1,69 @@
-body {
+header {
   display: flex;
-  justify-content: center;
-  align-items: center;
-  min-height: 100vh;
-
-  background: rgb(163, 208, 219);
-  background: linear-gradient(
-    227deg,
-    rgba(163, 208, 219, 1) 0%,
-    rgba(163, 176, 219, 1) 20%,
-    rgba(163, 173, 219, 1) 34%,
-    rgba(163, 219, 208, 1) 59%,
-    rgba(163, 208, 219, 1) 74%,
-    rgba(163, 208, 219, 1) 100%
-  );
+  justify-content: space-between;
+  background-color: #77b377;
+  padding: 25px;
 }
+
+.home_second_nav {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-around;
+  margin: 15px;
+}
+
+hl {
+  font-size: 20px;
+  font-weight: bold;
+}
+
+.home_display_container {
+  display: flex;
+  border: 1px solid black;
+  padding: 20px;
+  margin: 20px 0px;
+}
+
+main {
+  margin: 20px;
+}
+
+.explore_second_nav {
+  display: flex;
+  flex-flow: row;
+  justify-content: center;
+}
+
+#explore_section {
+  margin: 20px;
+  border: 1px solid black;
+  padding: 10px;
+}
+
+.resourceContainer {
+  display: flex;
+  margin: 20px 0px;
+  width: 100%;
+}
+
+.resourceThumbnail {
+  width: 200px;
+  margin: 10px;
+}
+
+.resourceInfo {
+  display: flex;
+  flex-direction: column;
+  margin-left: 20px;
+  width: 100%;
+}
+
+.resourceDate {
+  font-size: 12px;
+}
+
+.resourceFooter {
+  display: flex;
+  flex-direction: row;
+}
+
