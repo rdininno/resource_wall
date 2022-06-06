@@ -15,5 +15,16 @@ module.exports = (db) => {
         console.log("error in getAllResources"), res.send(err);
       });
   });
+
+  router.post("/search", (req, res) => {
+
+    queries.resourceSearchQuery(req)
+      .then((data) => {
+        res.json(data);
+      })
+      .catch((err) => {
+        console.log("error in searchQuery"), res.send(err);
+      });
+  })
   return router;
 };
