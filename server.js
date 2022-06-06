@@ -36,6 +36,12 @@ app.use(express.static("public"));
 // const widgetsRoutes = require("./routes/widgets");
 // app.use("/api/widgets", widgetsRoutes(db));
 
+// const database = require("./routes/databaseQueries.js");
+const dataRoutes = require("./routes/databaseRoutes.js");
+app.use("/api/explore", dataRoutes(db));
+
+
+
 //Routes for Favorites, Resources, Reviews and tags
 // I keep some route in case will need it for the ajax call in future
 const usersRoutes = require("./routes/users.js");
@@ -44,9 +50,9 @@ const favouritesRoutes = require("./routes/favourites.js");
 const explore = require("./routes/explore.js");
 
 // call route file
+app.use('/explore', explore(db));
 app.use("/users", usersRoutes(db));
 app.use("/resources", resourcesRoutes(db));
-app.use("/explore", explore(db));
 // Need to confirm
 app.use("/favourites", favouritesRoutes(db));
 
