@@ -46,9 +46,9 @@ const explore = require("./routes/explore.js");
 // call route file
 app.use("/users", usersRoutes(db));
 app.use("/resources", resourcesRoutes(db));
-
+app.use("/explore", explore(db));
 // Need to confirm
-app.use("/favouritess", favouritesRoutes(db));
+app.use("/favourites", favouritesRoutes(db));
 
 // Home page
 // After discuss will move below two route to routes folder

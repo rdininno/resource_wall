@@ -6,7 +6,8 @@ const router = express.Router();
 
 module.exports = (db) => {
   // Direct/render to Explore page
-  app.get("/explore", (req, res) => {
+  router.get("/", (req, res) => {
     res.render("explore");
   });
+  return router;
 };
