@@ -1,22 +1,19 @@
 <!DOCTYPE html>
 <html lang="en">
+  <head>
+    <title>Home Page</title>
 
-<head>
-  <title>Home Page</title>
+    <link rel="stylesheet" href="/vendor/normalize-4.1.1.css" type="text/css" />
+    <link rel="stylesheet" href="/vendor/border-box.css" type="text/css" />
+    <link rel="stylesheet" href="/styles/main.css" type="text/css" />
+    <link rel="stylesheet" href="/styles/layout.css" type="text/css" />
 
-  <link rel="stylesheet" href="/vendor/normalize-4.1.1.css" type="text/css" />
-  <link rel="stylesheet" href="/vendor/border-box.css" type="text/css" />
-  <link rel="stylesheet" href="/styles/main.css" type="text/css" />
-  <link rel="stylesheet" href="/styles/layout.css" type="text/css" />
+    <script type="text/javascript" src="/vendor/jquery-3.0.0.js"></script>
+    <script type="text/javascript" src="/scripts/home/homeApp.js"></script>
+  </head>
 
-  <script type="text/javascript" src="/vendor/jquery-3.0.0.js"></script>
-  <script type="text/javascript" src="/scripts/app.js"></script>
-</head>
-
-
-
-<body>
-  <%- include('partials/_header') %>
+  <body>
+    <%- include('partials/_header') %>
     <main>
       <div class="home_second_nav">
         <button class="my_resources_button">My resources</button>
@@ -27,34 +24,31 @@
         <hl>My Resources</hl>
         <div class="resource_display_container">
           <article class="resourceContainer">
-
             <body>
-
               <div class="thumbnailContainer">
-                <img class="resourceThumbnail" src="https://imgur.com/aWZvRbG.png">
+                <img
+                  class="resourceThumbnail"
+                  src="https://imgur.com/aWZvRbG.png"
+                />
               </div>
 
               <div class="resourceInfo">
-                <h2 class="resourceTitle">RESOURCE TITLE</h2>
-                <div class="resourceDescription">This would be where the description goes for the resource</div>
+                <h2 class="resourceTitle">${resource.title}</h2>
+                <div class="resourceDescription">${resource.description}</div>
 
                 <div class="resourceFooter">
-                  <p class="resourceDate">CREATED AT DATE</p>
+                  <p class="resourceDate">${resource.created_at}</p>
                   <div class="resourceIcons">
                     <i class="fa-solid fa-heart"></i>
                     <i class="fa-solid fa-comment"></i>
                     <i class="fa-solid fa-star-sharp"></i>
-                   </div>
-
+                  </div>
                 </div>
               </div>
-
             </body>
           </article>
         </div>
       </section>
     </main>
-</body>
-
+  </body>
 </html>
-

@@ -9,14 +9,13 @@ module.exports = (db) => {
   router.get("/:id", (req, res) => {
     const id = req.params.id;
     //send res for testing
-    res.send(`hello: id ${id}`);
+
     console.log(`hello from resources: id ${id}`);
-
-    db.query(``)
+    db.query(`select * from resources where id = ${id};`)
       .then((data) => {
-        const resource = data.rows;
-
-        console.log(resource);
+        console.log(data.rows);
+        // res.send(`hello: id ${id}`);
+        return res.send(data.rows);
       })
       .catch((err) => {
         res.status(500).json({ error: err.message });
