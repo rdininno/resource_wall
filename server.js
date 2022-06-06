@@ -42,6 +42,7 @@ const usersRoutes = require("./routes/users.js");
 const resourcesRoutes = require("./routes/resources.js");
 const favouritesRoutes = require("./routes/favourites.js");
 const explore = require("./routes/explore.js");
+const newResource = require("./routes/newResource.js");
 
 // call route file
 app.use("/users", usersRoutes(db));
@@ -49,6 +50,7 @@ app.use("/resources", resourcesRoutes(db));
 app.use("/explore", explore(db));
 // Need to confirm
 app.use("/favourites", favouritesRoutes(db));
+app.use("/newResource", newResource(db));
 
 // Home page
 // After discuss will move below two route to routes folder
