@@ -11,7 +11,7 @@ module.exports = (db) => {
     //send res for testing
 
     console.log(`hello from resources: id ${id}`);
-    db.query(`select * from resources where id = ${id};`)
+    db.query(`select * from resources where creator_id = ${id};`)
       .then((data) => {
         console.log(data.rows);
         // res.send(`hello: id ${id}`);

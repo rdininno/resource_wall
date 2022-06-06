@@ -4,6 +4,19 @@
 const express = require("express");
 const router = express.Router();
 
+// GET -  Favourite by ID
+router.get("/:id", (req, res) => {
+  const id = req.params.id;
+  //delete query
+  db.query(``)
+    .then((data) => {
+      console.log("find success");
+    })
+    .catch((err) => {
+      res.status(500).json({ error: err.message });
+    });
+});
+
 module.exports = (db) => {
   // Post - ADD favourite
   router.post("/", (req, res) => {

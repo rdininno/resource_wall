@@ -56,4 +56,13 @@ $(() => {
       success: loadResources(id),
     });
   });
+
+  $(".my_favourites_button").click(function (e) {
+    e.preventDefault();
+    $.ajax({
+      type: "GET",
+      url: `/favourities/${id}`,
+      success: loadResources(id),
+    });
+  });
 });
