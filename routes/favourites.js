@@ -5,6 +5,8 @@ const express = require("express");
 const router = express.Router();
 
 module.exports = (db) => {
+  // select * from resources join favourites on resources.id = resource_id where user_id = 2;
+
   // Post - ADD favourite
   router.post("/", (req, res) => {
     // need to find out how grab data from req
