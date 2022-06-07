@@ -1,6 +1,15 @@
 // Load data from database by calling resource route
 const loadResources = function (id) {
   $.get(`/resources/${id}`, { method: "GET" }).then((data) => {
+    console.log(data);
+    renderResource(data);
+  });
+};
+
+// Load data from database by calling favourite route
+const loadfavourite = function (id) {
+  $.get(`/favourites/${id}`, { method: "GET" }).then((data) => {
+    console.log(data);
     renderResource(data);
   });
 };
@@ -39,12 +48,13 @@ const createResourceElement = (resource) => {
   return $resource;
 };
 
-$(() => {
+$("document").ready(() => {
   // Get ID from URL params
-  const queryString = window.location.search;
-  const urlParams = new URLSearchParams(queryString);
-  const id = urlParams.get("id");
+  // const queryString = window.location.search;
+  // const urlParams = new URLSearchParams(queryString);
+  // const id = urlParams.get("id");
 
+  const id = 2;
   // Call loadResource function with ID
   loadResources(id);
 
@@ -53,7 +63,10 @@ $(() => {
     $.ajax({
       type: "GET",
       url: `/resources/${id}`,
-      success: loadResources(id),
+      success: function () {
+        $(".home_title").text("My Resources");
+        loadResources(id);
+      },
     });
   });
 
@@ -61,8 +74,11 @@ $(() => {
     e.preventDefault();
     $.ajax({
       type: "GET",
-      url: `/favourities/${id}`,
-      success: loadResources(id),
+      url: `/favourites/${id}`,
+      success: function () {
+        $(".home_title").text("My Favourites");
+        loadfavourite(id);
+      },
     });
   });
 });

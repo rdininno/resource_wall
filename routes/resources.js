@@ -18,7 +18,6 @@ module.exports = (db) => {
     db.query(`select * from resources where creator_id = ${id};`)
       .then((data) => {
         console.log(data.rows);
-        // res.send(`hello: id ${id}`);
         return res.send(data.rows);
       })
       .catch((err) => {
@@ -32,11 +31,12 @@ module.exports = (db) => {
     const title = req.body.title;
     const description = req.body.description;
 
-
     // insert table
-    return db.query(
-      `INSERT INTO resources (creator_id, title, description, url) VALUES ('1', $1, $2, $3)`,
-      [title, description, url])
+    return db
+      .query(
+        `INSERT INTO resources (creator_id, title, description, url) VALUES ('1', $1, $2, $3)`,
+        [title, description, url]
+      )
       .then((res) => {
         return res.rows[0];
       })
