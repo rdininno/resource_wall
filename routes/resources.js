@@ -9,6 +9,7 @@ module.exports = (db) => {
     res.render("newResource");
   });
 
+
   // Get - resources with 'id'
   router.get("/:id", (req, res) => {
     const id = req.params.id;
