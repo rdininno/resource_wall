@@ -35,7 +35,7 @@ VALUES
     4,
     'MDN',
     'A website that provides all the syntax and use-cases for inbuilt functions in multiple programming languages',
-    'http://www.mdn.com'
+    'https://developer.mozilla.org/'
   );
 
 INSERT INTO
