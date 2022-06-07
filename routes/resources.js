@@ -12,13 +12,13 @@ module.exports = (db) => {
   // Get - resources with 'id'
   router.get("/:id", (req, res) => {
     const id = req.params.id;
-    //send res for testing
 
-    console.log(`hello from resources: id ${id}`);
-    db.query(`select * from resources where creator_id = '1';`)
+    db.query(`select * from resources where id = ${id};`)
       .then((data) => {
-        console.log(data.rows);
-        return res.send(data.rows);
+        const resource = data.rows[0];
+        res.render('resourcePage', {data: resource})
+
+        // return resource;
       })
       .catch((err) => {
         res.status(500).json({ error: err.message });
