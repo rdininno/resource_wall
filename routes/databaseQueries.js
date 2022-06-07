@@ -1,4 +1,5 @@
 module.exports = function (db) {
+  //query to get all resources
   return {
     getAllResources: (limit = 10) => {
       const allResourcesQuery = `SELECT * FROM resources LIMIT $1`;
@@ -15,22 +16,32 @@ module.exports = function (db) {
 
     resourceSearchQuery: (options, limit = 10) => {
       const queryData = options.body.data;
+      console.log(queryData);
       let queryString = `
-          SELECT resources.* FROM resources
+          SELECT DISTINCT resources.* FROM resources JOIN tags ON resources.id = tags.resource_id
           WHERE 1=1`;
       const queryParams = [];
 
-      queryString += ` AND title ILIKE $${queryParams.length + 1
+      // if search value is not empty add to query
+      if (queryData.searchValue) {
+        queryString += ` AND title ILIKE $${
+          queryParams.length + 1
         } OR description ILIKE $${queryParams.length + 1}`;
-      queryParams.push(`%${queryData}%`);
-
+        queryParams.push(`%${queryData.searchValue}%`);
+      }
+      // if tag value is not empty add to query
+      if (queryData.tagValue) {
+        queryString += ` AND tag ILIKE $${queryParams.length + 1}`;
+        queryParams.push(`%${queryData.tagValue}%`);
+      }
 
       queryParams.push(limit);
       queryString += `
-          GROUP BY resources.title, resources.id
+          GROUP BY resources.title, resources.id, tags.id
           ORDER BY resources.created_at
           LIMIT $${queryParams.length}`;
 
+      //return the results of the query
       return db
         .query(queryString, queryParams)
         .then((res) => {
