@@ -5,6 +5,25 @@ const express = require("express");
 const router = express.Router();
 
 module.exports = (db) => {
+  // GET -  Favourite by ID
+  router.get("/:id", (req, res) => {
+    const id = req.params.id;
+
+    db.query(
+      `SELECT * 
+    FROM resources 
+    JOIN favourites ON resources.id = resource_id 
+    WHERE user_id = ${id};`
+    )
+      .then((data) => {
+        console.log(data.rows);
+        return res.send(data.rows);
+      })
+      .catch((err) => {
+        res.status(500).json({ error: err.message });
+      });
+  });
+
   // Post - ADD favourite
   router.post("/", (req, res) => {
     // need to find out how grab data from req

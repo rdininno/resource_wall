@@ -13,14 +13,12 @@ module.exports = (db) => {
   router.get("/:id", (req, res) => {
     const id = req.params.id;
     //send res for testing
-    res.send(`hello: id ${id}`);
+
     console.log(`hello from resources: id ${id}`);
-
-    db.query(``)
+    db.query(`select * from resources where creator_id = ${id};`)
       .then((data) => {
-        const resource = data.rows;
-
-        console.log(resource);
+        console.log(data.rows);
+        return res.send(data.rows);
       })
       .catch((err) => {
         res.status(500).json({ error: err.message });
@@ -33,11 +31,12 @@ module.exports = (db) => {
     const title = req.body.title;
     const description = req.body.description;
 
-
     // insert table
-    return db.query(
-      `INSERT INTO resources (creator_id, title, description, url) VALUES ('1', $1, $2, $3)`,
-      [title, description, url])
+    return db
+      .query(
+        `INSERT INTO resources (creator_id, title, description, url) VALUES ('1', $1, $2, $3)`,
+        [title, description, url]
+      )
       .then((res) => {
         return res.rows[0];
       })
