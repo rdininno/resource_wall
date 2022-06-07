@@ -15,7 +15,6 @@ const goToResource = (evt) => {
     .catch((err) => {
       console.log(`resource with id: ${resourceId} not found. error: `, err);
     });
-
 }
 
 // function to use the form submit data to search for resources and prevent default
