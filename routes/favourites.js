@@ -7,7 +7,8 @@ const router = express.Router();
 // GET -  Favourite by ID
 router.get("/:id", (req, res) => {
   const id = req.params.id;
-  //delete query
+  // select * from resources join favourites on resources.id = resource_id where user_id = 2;
+
   db.query(``)
     .then((data) => {
       console.log("find success");
@@ -18,8 +19,6 @@ router.get("/:id", (req, res) => {
 });
 
 module.exports = (db) => {
-  // select * from resources join favourites on resources.id = resource_id where user_id = 2;
-
   // Post - ADD favourite
   router.post("/", (req, res) => {
     // need to find out how grab data from req
