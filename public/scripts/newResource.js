@@ -8,5 +8,6 @@ $(document).ready(() => {
       console.log('success', response);
     })
     $('.added_alert').show('fast');
+    $('#create_new_resource_form').trigger("reset");
   })
 });
