@@ -1,6 +1,6 @@
 // Load data from database by calling resource route
 const loadResources = function (id) {
-  $.get(`/resources/${id}`, { method: "GET" }).then((data) => {
+  $.get(`/users/${id}`, { method: "GET" }).then((data) => {
     console.log(data);
     renderResource(data);
   });
@@ -62,7 +62,7 @@ $("document").ready(() => {
     e.preventDefault();
     $.ajax({
       type: "GET",
-      url: `/resources/${id}`,
+      url: `/users/${id}`,
       success: function () {
         $(".home_title").text("My Resources");
         loadResources(id);

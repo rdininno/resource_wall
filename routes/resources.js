@@ -9,21 +9,6 @@ module.exports = (db) => {
     res.render("newResource");
   });
 
-  // Get - resources with 'id'
-  router.get("/:id", (req, res) => {
-    const id = req.params.id;
-    //send res for testing
-
-    console.log(`hello from resources: id ${id}`);
-    db.query(`select * from resources where creator_id = '1';`)
-      .then((data) => {
-        console.log(data.rows);
-        return res.send(data.rows);
-      })
-      .catch((err) => {
-        res.status(500).json({ error: err.message });
-      });
-  });
 
   // Post - ADD resource
   router.post("/", (req, res) => {

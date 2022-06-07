@@ -5,29 +5,30 @@ const router = express.Router();
 
 module.exports = (db) => {
   // Get - users
-  router.get("/", (req, res) => {
-    //send response
-    res.send("hello users");
-    console.log(`hello from User main`);
-    //Get everything from users
-    db.query(``)
-      .then((data) => {
-        console.log(data.rows);
-      })
-      .catch((err) => {
-        res.status(500).json({ error: err.message });
-      });
-  });
+  // router.get("/", (req, res) => {
+  //   //send response
+  //   res.send("hello users");
+  //   console.log(`hello from User main`);
+  //   //Get everything from users
+  //   db.query(``)
+  //     .then((data) => {
+  //       console.log(data.rows);
+  //     })
+  //     .catch((err) => {
+  //       res.status(500).json({ error: err.message });
+  //     });
+  // });
 
-  // Get - users with ID
+  // Get - resources with 'id'
   router.get("/:id", (req, res) => {
     const id = req.params.id;
-    res.send(`hello ${id}`);
+    //send res for testing
 
-    db.query(``)
+    console.log(`hello from resources: id ${id}`);
+    db.query(`select * from resources where creator_id = $1;`, [id])
       .then((data) => {
-        // Received Data and pass as object "user"
         console.log(data.rows);
+        return res.send(data.rows);
       })
       .catch((err) => {
         res.status(500).json({ error: err.message });
