@@ -1,7 +1,6 @@
 // Load data from database by calling resource route
-const loadResources = function (id) {
-  $.get(`/users/${id}`, { method: "GET" }).then((data) => {
-    console.log(data);
+const loadResources = function () {
+  $.get(`/users`, { method: "GET" }).then((data) => {
     renderResource(data);
   });
 };
@@ -9,7 +8,6 @@ const loadResources = function (id) {
 // Load data from database by calling favourite route
 const loadfavourite = function (id) {
   $.get(`/favourites/${id}`, { method: "GET" }).then((data) => {
-    console.log(data);
     renderResource(data);
   });
 };
@@ -48,6 +46,17 @@ const createResourceElement = (resource) => {
   return $resource;
 };
 
+const loginChange = function () {
+  const $user_button = `
+  <div class='userLogin'>
+    <button id='1'  class="userButton" value="1">user1</button>
+    <button id='2'  class="userButton" value="2">user2</button>
+    <button id='3'  class="userButton" value="3">user3</button>
+  </div>
+  `;
+  return $user_button;
+};
+
 $("document").ready(() => {
   // Get ID from URL params
   // const queryString = window.location.search;
@@ -56,16 +65,16 @@ $("document").ready(() => {
 
   const id = 2;
   // Call loadResource function with ID
-  loadResources(id);
+  loadResources();
 
   $(".my_resources_button").click(function (e) {
     e.preventDefault();
     $.ajax({
       type: "GET",
-      url: `/users/${id}`,
+      url: `/users`,
       success: function () {
         $(".home_title").text("My Resources");
-        loadResources(id);
+        loadResources();
       },
     });
   });
@@ -79,6 +88,22 @@ $("document").ready(() => {
         $(".home_title").text("My Favourites");
         loadfavourite(id);
       },
+    });
+  });
+
+  $(".loginButton").click(function () {
+    $(".loginButton").replaceWith(loginChange);
+    $(".userButton").on("click", function (e) {
+      const user_id = $(e.target).val();
+      $.post(`/users/set/${user_id}`);
+      $.ajax({
+        type: "GET",
+        url: `/users`,
+        success: function () {
+          $(".home_title").text("My Resources");
+          loadResources();
+        },
+      });
     });
   });
 });

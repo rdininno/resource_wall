@@ -7,6 +7,7 @@ const sassMiddleware = require("./lib/sass-middleware");
 const express = require("express");
 const app = express();
 const morgan = require("morgan");
+const cookieSession = require("cookie-session");
 
 // PG database client/connection setup
 const { Pool } = require("pg");
@@ -28,6 +29,14 @@ app.use(
     source: __dirname + "/styles",
     destination: __dirname + "/public/styles",
     isSass: false, // false => scss, true => sass
+  })
+);
+
+// User Cookie-session
+app.use(
+  cookieSession({
+    name: "session",
+    keys: ["key1", "key2"],
   })
 );
 
