@@ -5,6 +5,10 @@ const express = require("express");
 const router = express.Router();
 
 module.exports = (db) => {
+  router.get("/", (req, res) => {
+    res.render("newResource");
+  });
+
   // Get - resources with 'id'
   router.get("/:id", (req, res) => {
     const id = req.params.id;
@@ -24,19 +28,20 @@ module.exports = (db) => {
 
   // Post - ADD resource
   router.post("/", (req, res) => {
-    // need to find out how grab data from req
+    const url = req.body.url;
+    const title = req.body.title;
+    const description = req.body.description;
 
-    // const something = something
 
     // insert table
-    db.query(
-      `INSERT INTO resource (user_id, title, description, url, tag) 
-              VALUES (${user_id}, ${title}, ${description}, ${url},${tag});`
-    )
-      .then((data) => {
-        console.log(data.rows);
+    return db.query(
+      `INSERT INTO resources (creator_id, title, description, url) VALUES ('1', $1, $2, $3)`,
+      [title, description, url])
+      .then((res) => {
+        return res.rows[0];
       })
       .catch((err) => {
+        console.log(err);
         res.status(500).json({ error: err.message });
       });
   });
@@ -61,7 +66,7 @@ module.exports = (db) => {
     const id = req.params.id;
     //delete query
     db.query(
-      `DELETE FROM resources 
+      `DELETE FROM resources
             WHERE id = ${id}`
     )
       .then((data) => {
