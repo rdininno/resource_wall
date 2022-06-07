@@ -11,6 +11,7 @@
 
   <script type="text/javascript" src="/vendor/jquery-3.0.0.js"></script>
   <script type="text/javascript" src="/scripts/app.js"></script>
+  <script type="text/javascript" src="/scripts/resourceById.js"></script>
 
 </head>
 
@@ -30,16 +31,17 @@
         <h4>URL</h4>
         <p><%= data['url'] %></p>
         <h6>Created at <%= data['created_at'] %></h6>
+      </br>
         <div class="rate">
-          <input type="radio" id="star5" name="rate" value="5" />
+          <input type="radio" class="ratings_stars" id="star5" name="rate" value="5" />
           <label for="star5" title="text">5 stars</label>
-          <input type="radio" id="star4" name="rate" value="4" />
+          <input type="radio" class="ratings_stars" id="star4" name="rate" value="4" />
           <label for="star4" title="text">4 stars</label>
-          <input type="radio" id="star3" name="rate" value="3" />
+          <input type="radio" class="ratings_stars" id="star3" name="rate" value="3" />
           <label for="star3" title="text">3 stars</label>
-          <input type="radio" id="star2" name="rate" value="2" />
+          <input type="radio" class="ratings_stars" id="star2" name="rate" value="2" />
           <label for="star2" title="text">2 stars</label>
-          <input type="radio" id="star1" name="rate" value="1" />
+          <input type="radio" class="ratings_stars" id="star1" name="rate" value="1" />
           <label for="star1" title="text">1 star</label>
         </div>
 
