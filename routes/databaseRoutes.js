@@ -26,5 +26,15 @@ module.exports = (db) => {
         console.log("error in searchQuery"), res.send(err);
       });
   })
+
+  router.post("/review"), (req, res) => {
+    queries.resourceRatingQuery(req)
+      .then((data) => {
+        res.json(data);
+      })
+      .catch((err) => {
+        console.log("error, ", err);
+      })
+  }
   return router;
 };
