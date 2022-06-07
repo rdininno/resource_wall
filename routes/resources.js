@@ -17,7 +17,6 @@ module.exports = (db) => {
       .then((data) => {
         const resource = data.rows[0];
         res.render('resourcePage', {data: resource})
-
         // return resource;
       })
       .catch((err) => {
