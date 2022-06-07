@@ -6,8 +6,8 @@ const loadResources = function () {
 };
 
 // Load data from database by calling favourite route
-const loadfavourite = function (id) {
-  $.get(`/favourites/${id}`, { method: "GET" }).then((data) => {
+const loadfavourite = function () {
+  $.get(`/favourites`, { method: "GET" }).then((data) => {
     renderResource(data);
   });
 };
@@ -46,6 +46,7 @@ const createResourceElement = (resource) => {
   return $resource;
 };
 
+// template for 3 user login button
 const loginChange = function () {
   const $user_button = `
   <div class='userLogin'>
@@ -57,13 +58,22 @@ const loginChange = function () {
   return $user_button;
 };
 
+// template for logout button
+const logoutChange = function () {
+  const $logout_button = `
+  <div>
+  <button class='logout'>Logout</button>
+  </div>
+  `;
+  return $logout_button;
+};
+
 $("document").ready(() => {
   // Get ID from URL params
   // const queryString = window.location.search;
   // const urlParams = new URLSearchParams(queryString);
   // const id = urlParams.get("id");
 
-  const id = 2;
   // Call loadResource function with ID
   loadResources();
 
@@ -83,27 +93,45 @@ $("document").ready(() => {
     e.preventDefault();
     $.ajax({
       type: "GET",
-      url: `/favourites/${id}`,
+      url: `/favourites`,
       success: function () {
         $(".home_title").text("My Favourites");
-        loadfavourite(id);
+        loadfavourite();
       },
     });
   });
 
   $(".loginButton").click(function () {
-    $(".loginButton").replaceWith(loginChange);
-    $(".userButton").on("click", function (e) {
-      const user_id = $(e.target).val();
-      $.post(`/users/set/${user_id}`);
-      $.ajax({
-        type: "GET",
-        url: `/users`,
-        success: function () {
-          $(".home_title").text("My Resources");
-          loadResources();
-        },
-      });
+    $(".loginButton").css("display", "none");
+    $(".userLogin").css("display", "block");
+  });
+
+  $(".userButton").on("click", function (e) {
+    const user_id = $(e.target).val();
+    $.post(`/users/set/${user_id}`);
+    $.ajax({
+      type: "GET",
+      url: `/users`,
+      success: function () {
+        $(".home_title").text("My Resources");
+        loadResources();
+      },
     });
+    $(".userLogin").css("display", "none");
+    $(".logout").css("display", "block");
+  });
+
+  $(".logout").click(function () {
+    $.post("/users/logout");
+    $.ajax({
+      type: "GET",
+      url: `/users`,
+      success: function () {
+        $(".home_title").text("My Resources");
+        loadResources();
+      },
+    });
+    $(".logout").css("display", "none");
+    $(".loginButton").css("display", "block");
   });
 });

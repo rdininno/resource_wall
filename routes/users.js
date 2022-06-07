@@ -4,14 +4,12 @@ const express = require("express");
 const router = express.Router();
 
 module.exports = (db) => {
-  // Get - resources with 'id'
+  // Get - resources with ID(from cookie session)
   router.get("/", (req, res) => {
     // const id = req.params.id;
     const id = req.session.user_id;
-    console.log(`hello from resources: id ${id}`);
     db.query(`select * from resources where creator_id = $1;`, [id])
       .then((data) => {
-        console.log(data.rows);
         return res.send(data.rows);
       })
       .catch((err) => {
@@ -19,25 +17,11 @@ module.exports = (db) => {
       });
   });
 
-  // Post -  Edit User with ID
-  router.post("/:id", (req, res) => {
-    // const something = something
-
-    db.query(``)
-      .then((data) => {
-        console.log("Update", data.rows);
-      })
-      .catch((err) => {
-        res.status(500).json({ error: err.message });
-      });
-  });
-
   // Post - user Logout
-
   router.post("/logout", (req, res) => {
-    const user_id = req.session.user_id;
+    console.log("logout listen");
     req.session = null;
-    res.redirect("/users");
+    res.redirect("/");
   });
 
   // Post - Set users cookie
@@ -48,6 +32,18 @@ module.exports = (db) => {
     req.session.user_id = user_id;
     console.log(`id`, req.session.user_id);
     res.redirect("/users");
+  });
+
+  // Post -  Edit User with ID
+  router.post("/:id", (req, res) => {
+    // const something = something
+    db.query(``)
+      .then((data) => {
+        console.log("Update", data.rows);
+      })
+      .catch((err) => {
+        res.status(500).json({ error: err.message });
+      });
   });
 
   return router;
