@@ -16,9 +16,9 @@ module.exports = function (db) {
 
     resourceSearchQuery: (options, limit = 10) => {
       const queryData = options.body.data;
-      console.log(queryData);
+      console.log("query data", queryData);
       let queryString = `
-          SELECT DISTINCT resources.* FROM resources JOIN tags ON resources.id = tags.resource_id
+          SELECT DISTINCT resources.* FROM resources LEFT JOIN tags ON resources.id = tags.resource_id
           WHERE 1=1`;
       const queryParams = [];
 
@@ -45,6 +45,7 @@ module.exports = function (db) {
       return db
         .query(queryString, queryParams)
         .then((res) => {
+          console.log(res.rows);
           return res.rows;
         })
         .catch((err) => {
