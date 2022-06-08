@@ -1,9 +1,18 @@
 <header>
-  <div class="header_logo">RESOURCE WALL</div>
-  <nav>
-    <a href="/">Home</a>
-    <a href="/explore">Explore</a>
-    <a href="/resources">Add Resource</a>
+  <nav class="relative container mx-auto p-6 bg-dark-red rounded-b-lg">
+    <div class="flex items-center justify-between">
+      <div class="header_logo pt-1 text-white font-bold"><p>RESOURCE WALL</p></div>
+      <div class="flex space-x-6">
+        <a href="/" class="bg-cream hover:bg-blue-400 font-bold py-2 px-4 border-b-4 border-dark-cream hover:border-blue-500 rounded">Home</a>
+        <a href="/explore" class="bg-cream hover:bg-blue-400 font-bold py-2 px-4 border-b-4 border-dark-cream hover:border-blue-500 rounded">Explore</a>
+        <a href="/resources" class="bg-cream hover:bg-blue-400 font-bold py-2 px-4 border-b-4 border-dark-cream hover:border-blue-500 rounded">Add Resource</a>
+      </div>
+      <div class="header_user_name pt-1 text-white font-bold">
+        <p>USER</p>
+      </div>
+
+      </div>
+    </div>
   </nav>
   <div class="logCheck">
     <% if (typeof user !== "undefined") { %>
