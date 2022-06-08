@@ -85,13 +85,22 @@ module.exports = (db) => {
 
   // Post Edit resource
   router.post("/:id", (req, res) => {
-    //Which part of resource need to update
-    // and how to grab all data from req
-
+    const editQuery = `UPDATE resources SET title = $1, description = $2, url = $3 WHERE id = $4 RETURNING *`;
+    const editQueryParams = [
+      req.body.title,
+      req.body.description,
+      req.body.url,
+      req.params.id,
+    ];
     // update table
-    db.query(``)
+    return db
+      .query(editQuery, editQueryParams)
       .then((data) => {
-        console.log(data.rows);
+        const resourceId = data.rows[0];
+        return db.query("UPDATE tags SET tag = $1 WHERE resource_id = $2", [
+          req.body.tags,
+          resourceId.id,
+        ]);
       })
       .catch((err) => {
         res.status(500).json({ error: err.message });
