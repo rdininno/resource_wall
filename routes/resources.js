@@ -16,12 +16,13 @@ module.exports = (db) => {
 
   // Get - resources with 'id'
   router.get("/:id", (req, res) => {
+    const user_id = req.session.user_id;
     const id = req.params.id;
 
     db.query(`select * from resources where id = ${id};`)
       .then((data) => {
         const resource = data.rows[0];
-        res.render("resourcePage", { data: resource });
+        res.render("resourcePage", { data: resource, user: user_id });
         // return resource;
       })
       .catch((err) => {
