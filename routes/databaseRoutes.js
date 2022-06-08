@@ -17,6 +17,16 @@ module.exports = (db) => {
   });
 
   router.post("/search", (req, res) => {
+    if (!req.body.data.searchValue && !req.body.data.tagValue) {
+      req.session.searchValue = null;
+    }
+
+    if (req.body.data.searchValue) {
+      req.session.searchValue = req.body.data.searchValue;
+    }
+
+    req.body.data.searchValue = req.session.searchValue;
+
     queries
       .resourceSearchQuery(req)
       .then((data) => {
@@ -25,20 +35,18 @@ module.exports = (db) => {
       .catch((err) => {
         console.log("error in searchQuery"), res.send(err);
       });
-
-  })
+  });
 
   router.post("/review", (req, res) => {
-    queries.resourceRatingQuery(req)
+    queries
+      .resourceRatingQuery(req)
       .then((data) => {
         res.json(data);
       })
       .catch((err) => {
         console.log("error, ", err);
-      })
-  }
-
-  );
+      });
+  });
 
   return router;
 };
