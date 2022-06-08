@@ -27,12 +27,12 @@ const renderResource = function (resources) {
 };
 
 const createResourceElement = (resource) => {
-  const $resource = `<article class="resourceContainer">
+  const $resource = `<article class="resourceContainer flex flex-col border-solid border-4 border-black w-2/5 my-1">
   <body>
       <div class="resourceInfo">
-      <h2 class="resourceTitle">${resource.title}</h2>
-      <div class="resourceDescription">${resource.description}</div>
-      <div class="resourceFooter">
+      <h2 class="resourceTitle text-4xl mx-3 my-2 underline">${resource.title}</h2>
+      <div class="resourceDescription mx-3 my-2">${resource.description}</div>
+      <div class="resourceFooter mx-3 my-2">
         <p class="resourceDate">${resource.created_at}</p>
         <div class="resourceIcons">
           <i class="fa-solid fa-heart"></i>

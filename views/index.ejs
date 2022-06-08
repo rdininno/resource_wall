@@ -13,18 +13,33 @@
     <script type="text/javascript" src="/scripts/loginbutton.js"></script>
   </head>
 
-  <body>
+  <body class="bg-cream">
     <%- include('partials/_header') %>
     <main>
-      <div class="home_second_nav">
-        <button class="my_resources_button">My resources</button>
-        <button class="my_favourites_button">My favourites</button>
-      </div>
-
+      <section class="relative container mx-auto-p-6">
+        <div class="home_second_nav flex items-center justify-center my-2">
+          <button
+            class="my_resources_button bg-reg-red hover:bg-dark-red font-bold py-2 px-4 mr-2 border-b-4 text-cream border-dark-red hover:border-reg-red rounded mr-6"
+          >
+            My resources
+          </button>
+          <button
+            class="my_favourites_button bg-reg-red hover:bg-dark-red font-bold py-2 px-4 mr-2 border-b-4 text-cream border-dark-red hover:border-reg-red rounded ml-6"
+          >
+            My favourites
+          </button>
+        </div>
+      </section>
       <section id="resource_section">
-        <h1 class="home_title">My Resources</h1>
-        <div class="resource_display_container">
-          <article class="resourceContainer">
+        <div class="flex justify-center">
+          <div class="home_title underline text-2xl mb-4">My Resources</div>
+        </div>
+        <div
+          class="resource_display_container container flex justify-center justify-around flex-wrap"
+        >
+          <article
+            class="resourceContainer flex flex-col border-solid border-4 border-black w-2/5 my-1"
+          >
             <body>
               <div class="thumbnailContainer">
                 <img
