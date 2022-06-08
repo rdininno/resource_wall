@@ -7,7 +7,12 @@ const router = express.Router();
 module.exports = (db) => {
   // Direct/render to Explore page
   router.get("/", (req, res) => {
-    res.render("explore");
+    const id = req.session.user_id;
+    let templateVars = {};
+    if (id !== undefined) {
+      templateVars = { user: id };
+    }
+    res.render("explore", templateVars);
   });
   return router;
 };
