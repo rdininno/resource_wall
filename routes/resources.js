@@ -6,7 +6,12 @@ const router = express.Router();
 
 module.exports = (db) => {
   router.get("/", (req, res) => {
-    res.render("newResource");
+    const id = req.session.user_id;
+    let templateVars = {};
+    if (id !== undefined) {
+      templateVars = { user: id };
+    }
+    res.render("newResource", templateVars);
   });
 
 

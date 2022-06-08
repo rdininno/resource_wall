@@ -70,7 +70,13 @@ app.use("/favourites", favouritesRoutes(db));
 // Direct/render to index page
 app.get("/", (req, res) => {
   //rediret explore
-  res.render("index");
+  const id = req.session.user_id;
+  let templateVars = {};
+  if (id !== undefined) {
+    templateVars = { user: id };
+  }
+  console.log("from root page cookie", templateVars.user);
+  res.render("index", templateVars);
 });
 
 app.listen(PORT, () => {
