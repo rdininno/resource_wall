@@ -9,6 +9,21 @@ module.exports = (db) => {
     res.render("newResource");
   });
 
+  // Get - resources with 'id'
+  router.get("/:id", (req, res) => {
+    const id = req.params.id;
+    //send res for testing
+
+    console.log(`hello from resources: id ${id}`);
+    db.query(`select * from resources where creator_id = '1';`)
+      .then((data) => {
+        console.log(data.rows);
+        return res.send(data.rows);
+      })
+      .catch((err) => {
+        res.status(500).json({ error: err.message });
+      });
+  });
 
   // Post - ADD resource
   router.post("/", (req, res) => {
@@ -21,14 +36,14 @@ module.exports = (db) => {
     return db
       .query(
         `INSERT INTO resources (creator_id, title, description, url) VALUES ('1', $1, $2, $3) RETURNING *;`,
-        [title, description, url],
-
+        [title, description, url]
       )
       .then((res) => {
         const newResource = res.rows[0];
         return db.query(
           `INSERT INTO tags (user_id, resource_id, tag) VALUES ('1', $1, $2)`,
-        [newResource.id, tags])
+          [newResource.id, tags]
+        );
       })
       .catch((err) => {
         console.log(err);

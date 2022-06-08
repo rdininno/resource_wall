@@ -2,7 +2,20 @@
 $(document).ready(() => {
   $(".explore_search_form").on("submit", searchSubmit);
   $("#allResources").on("click", loadResources);
+  $(".explore_display_container").on("click", goToResource);
 });
+
+const goToResource = (evt) => {
+  const resourceId = $(evt.target).parent().attr("id");
+
+  $.get(`/resources/${resourceId}`)
+    .then(() => {
+      window.location = `/resources/${resourceId}`;
+    })
+    .catch((err) => {
+      console.log(`resource with id: ${resourceId} not found. error: `, err);
+    });
+};
 
 // function to use the form submit data to search for resources and prevent default
 const searchSubmit = (evt) => {
@@ -52,9 +65,8 @@ function parseDate(input) {
 
 // function to create the html for each resource
 const createResourceElement = (resource) => {
-  const $resource = `<div class="resourceInfo">
+  const $resource = `<div class="resourceInfo" id=${resource.id}>
                 <h2 class="resourceTitle">${resource.title}</h2>
-                <a href="${resource.url}" target="_blank">${resource.url}</a>
                 <div class="resourceDescription">${resource.description}</div>
 
                 <div class="resourceFooter">
