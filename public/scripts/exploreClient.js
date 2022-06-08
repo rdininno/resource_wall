@@ -6,8 +6,8 @@ $(document).ready(() => {
 });
 
 const goToResource = (evt) => {
-  console.log($(evt.target).parent());
-  const resourceId = $(evt.target).parent().attr("id");
+  console.log($(evt.target).closest());
+  const resourceId = $(evt.target).closest(".resource_container").attr("id");
   console.log(resourceId);
   $.get(`/resources/${resourceId}`)
     .then(() => {
@@ -67,7 +67,7 @@ function parseDate(input) {
 
 // function to create the html for each resource
 const createResourceElement = (resource) => {
-  const $resource = `<div class="flex flex-col border-solid border-4 border-black w-2/5 my-1 cursor-pointer" id="${
+  const $resource = `<div class="resource_container flex flex-col border-solid border-4 border-black w-2/5 my-1 cursor-pointer" id="${
     resource.id
   }">
   <h2 class="resourceTitle text-4xl mx-3 my-2 underline decoration-wavy">${

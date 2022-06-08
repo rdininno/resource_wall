@@ -26,78 +26,80 @@ const renderResource = function (resources) {
   }
 };
 
+// Change the Date display
+function parseDate(input) {
+  return new Date(input); // Note: months are 0-based
+}
+
 const createResourceElement = (resource) => {
-  const $resource = `<article class="resourceContainer flex flex-col border-solid border-4 border-black w-2/5 my-1">
-  <body>
-      <div class="resourceInfo">
-      <h2 class="resourceTitle text-4xl mx-3 my-2 underline">${resource.title}</h2>
-      <div class="resourceDescription mx-3 my-2">${resource.description}</div>
-      <div class="resourceFooter mx-3 my-2">
-        <p class="resourceDate">${resource.created_at}</p>
-        <div class="resourceIcons">
-          <i class="fa-solid fa-heart"></i>
-          <i class="fa-solid fa-comment"></i>
-          <i class="fa-solid fa-star-sharp"></i>
-        </div>
-      </div>
+  const $resource = `<div class="resourceInfo flex flex-col border-solid border-4 border-black w-2/5 my-1 cursor-pointer" id="${
+    resource.id
+  }">
+  <h2 class="resourceTitle text-4xl mx-3 my-2 underline decoration-wavy">${
+    resource.title
+  }</h2>
+  <div class="resourceDescription mx-3 my-2">
+    A useful website that has different pages to post
+  </div>
+
+  <div class="resourceFooter mx-3 my-2">
+    <p class="resourceDate">${parseDate(resource.created_at)}</p>
+    <div class="resourceIcons">
+      <i class="fa-solid fa-heart"></i>
+      <i class="fa-solid fa-comment"></i>
+      <i class="fa-solid fa-star-sharp"></i>
     </div>
-  </body>
-</article>`;
+  </div>
+</div>`;
   return $resource;
 };
 
-// template for 3 user login button
-const loginChange = function () {
-  const $user_button = `
-  <div class='userLogin'>
-    <button id='1'  class="userButton" value="1">user1</button>
-    <button id='2'  class="userButton" value="2">user2</button>
-    <button id='3'  class="userButton" value="3">user3</button>
-  </div>
-  `;
-  return $user_button;
+// Show user resources
+const showMyResource = function () {
+  $.ajax({
+    type: "GET",
+    url: `/users`,
+    success: function () {
+      $(".home_title").text("My Resources");
+      loadResources();
+    },
+  });
 };
 
-// template for logout button
-const logoutChange = function () {
-  const $logout_button = `
-  <div>
-  <button class='logout'>Logout</button>
-  </div>
-  `;
-  return $logout_button;
+// Show user favorite
+const showMyFavourites = function () {
+  $.ajax({
+    type: "GET",
+    url: `/favourites`,
+    success: function () {
+      $(".home_title").text("My Favourites");
+      loadfavourite();
+    },
+  });
+};
+
+// Go to resource
+const goToResource = (evt) => {
+  // console.log($(evt.target).closest());
+  const resourceId = $(evt.target).closest(".resourceInfo").attr("id");
+
+  console.log(resourceId);
+  $.get(`/resources/${resourceId}`)
+    .then(() => {
+      window.location = `/resources/${resourceId}`;
+    })
+    .catch((err) => {
+      console.log(`resource with id: ${resourceId} not found. error: `, err);
+    });
 };
 
 $("document").ready(() => {
-  // Get ID from URL params
-  // const queryString = window.location.search;
-  // const urlParams = new URLSearchParams(queryString);
-  // const id = urlParams.get("id");
-
   // Call loadResource function with ID
   loadResources();
-
-  $(".my_resources_button").click(function (e) {
-    e.preventDefault();
-    $.ajax({
-      type: "GET",
-      url: `/users`,
-      success: function () {
-        $(".home_title").text("My Resources");
-        loadResources();
-      },
-    });
-  });
-
-  $(".my_favourites_button").click(function (e) {
-    e.preventDefault();
-    $.ajax({
-      type: "GET",
-      url: `/favourites`,
-      success: function () {
-        $(".home_title").text("My Favourites");
-        loadfavourite();
-      },
-    });
-  });
+  // load resource with ajax
+  $(".my_resources_button").click(showMyResource);
+  // load favourite with ajax
+  $(".my_favourites_button").click(showMyFavourites);
+  // click and redirect to resource detail page
+  $(".resource_display_container").on("click", goToResource);
 });
