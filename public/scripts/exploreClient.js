@@ -84,11 +84,5 @@ const createResourceElement = (resource) => {
 };
 
 
-// function to load the resources to the page
-const loadResources = () => {
-  $.get("api/explore").then((res) => {
-    console.log(res)
-    $('.resourceInfo').replaceWith(renderResources(res));
-  });
-};
+
 
