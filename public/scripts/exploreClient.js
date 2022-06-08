@@ -70,12 +70,14 @@ const createResourceElement = (resource) => {
   const $resource = `<div class="flex flex-col border-solid border-4 border-black w-2/5 my-1 cursor-pointer" id="${
     resource.id
   }">
-  <h2 class="resourceTitle text-4xl">${resource.title}</h2>
-  <div class="resourceDescription">
+  <h2 class="resourceTitle text-4xl mx-3 my-2 underline decoration-wavy">${
+    resource.title
+  }</h2>
+  <div class="resourceDescription mx-3 my-2">
     A useful website that has different pages to post
   </div>
 
-  <div class="resourceFooter">
+  <div class="resourceFooter mx-3 my-2">
     <p class="resourceDate">${parseDate(resource.created_at)}</p>
     <div class="resourceIcons">
       <i class="fa-solid fa-heart"></i>
