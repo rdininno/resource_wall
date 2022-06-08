@@ -97,10 +97,11 @@ module.exports = (db) => {
       .query(editQuery, editQueryParams)
       .then((data) => {
         const resourceId = data.rows[0];
-        return db.query("UPDATE tags SET tag = $1 WHERE resource_id = $2", [
+        db.query("UPDATE tags SET tag = $1 WHERE resource_id = $2", [
           req.body.tags,
           resourceId.id,
         ]);
+        res.redirect(`/resources/${resourceId.id}`);
       })
       .catch((err) => {
         res.status(500).json({ error: err.message });
