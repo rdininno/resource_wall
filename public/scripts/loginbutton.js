@@ -1,10 +1,10 @@
-const buttonTemplate = function (id) {
-  $result = `
-  <p>Logged In As User: ${id}</p>
+// const buttonTemplate = function (id) {
+//   $result = `
+//   <p>Logged In As User: ${id}</p>
 
-  `;
-  return $result;
-};
+//   `;
+//   return $result;
+// };
 
 $(() => {
   $(".loginButton").click(function () {
