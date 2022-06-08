@@ -6,35 +6,80 @@
     <link rel="stylesheet" href="/vendor/normalize-4.1.1.css" type="text/css" />
     <link rel="stylesheet" href="/vendor/border-box.css" type="text/css" />
     <link rel="stylesheet" href="/styles/main.css" type="text/css" />
-    <link rel="stylesheet" href="/styles/layout.css" type="text/css" />
+    <!-- <link rel="stylesheet" href="/styles/layout.css" type="text/css" /> -->
 
     <script type="text/javascript" src="/vendor/jquery-3.0.0.js"></script>
     <script type="text/javascript" src="/scripts/exploreClient.js"></script>
-    <script type="text/javascript" src="/scripts/loginbutton.js"></script>
   </head>
 
-  <body>
+  <body class="bg-cream">
     <%- include('partials/_header') %>
     <main>
-      <div class="explore_second_nav">
-        <button id="allResources">Show all</button>
-        <form class="explore_search_form" action="/explore">
-          <input id="search_value" type="text" placeholder="Search.." />
-          <label for="tag">fun</label>
-          <input type="radio" class="tag" value="fun" name="tags" />
-          <label for="tag">education</label>
-          <input type="radio" class="tag" value="education" name="tags" />
-          <label for="tag">videos</label>
-          <input type="radio" class="tag" value="videos" name="tags" />
-          <label for="tag">programming</label>
-          <input type="radio" class="tag" value="programming" name="tags" />
-          <input type="submit" value="Search" class="explore_search_button" />
-        </form>
-      </div>
+      <section class="relative container mx-auto p-6">
+        <div class="explore_second_nav flex items-center justify-center">
+          <button
+            id="allResources"
+            class="bg-reg-red hover:bg-dark-red font-bold py-2 px-4 mr-2 border-b-4 text-cream border-dark-red hover:border-reg-red rounded"
+          >
+            Show all
+          </button>
 
+          <form class="explore_search_form flex flex-wrap" action="/explore">
+            <input
+              id="search_value"
+              type="text"
+              placeholder="Search.."
+              class="font-bold text-lg"
+            />
+            <div class="inline-flex flex-col flex-wrap justify-center">
+              <input
+                type="radio"
+                class="tag block place-self-center"
+                value="fun"
+                name="tags"
+              />
+              <label for="tag" class="block mx-2">fun</label>
+            </div>
+            <div class="inline-flex flex-col flex-wrap justify-center">
+              <input
+                type="radio"
+                class="tag block place-self-center"
+                value="education"
+                name="tags"
+              />
+              <label for="tag" class="block mx-2">education</label>
+            </div>
+            <div class="inline-flex flex-col flex-wrap justify-center">
+              <input
+                type="radio"
+                class="tag block place-self-center"
+                value="videos"
+                name="tags"
+              />
+              <label for="tag" class="block mx-2">videos</label>
+            </div>
+            <div class="inline-flex flex-col flex-wrap justify-center">
+              <input
+                type="radio"
+                class="tag block place-self-center"
+                value="programming"
+                name="tags"
+              />
+              <label for="tag" class="block mx-2">programming</label>
+            </div>
+            <input
+              type="submit"
+              value="Search"
+              class="explore_search_button bg-reg-red hover:bg-dark-red font-bold py-2 px-4 mr-2 border-b-4 text-cream border-dark-red hover:border-reg-red rounded cursor-pointer"
+            />
+          </form>
+        </div>
+      </section>
       <section id="explore_section">
         <div class="explore_display_container">explore results</div>
-        <div class="to-be-replaced"></div>
+        <div
+          class="resourceInfo container flex justify-center justify-around flex-wrap"
+        ></div>
       </section>
     </main>
   </body>
