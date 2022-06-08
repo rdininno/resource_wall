@@ -27,8 +27,10 @@ module.exports = (db) => {
   router.post("/", (req, res) => {
     // need to find out how grab data from req
     const user_id = req.session.user_id;
+    if (typeof user_id === "undefined") {
+      return res.send("Please log in");
+    }
     const resource_id = req.body.data.resource_id;
-
     // insert table
     db.query(
       `INSERT INTO favourites (user_id, resource_id)
