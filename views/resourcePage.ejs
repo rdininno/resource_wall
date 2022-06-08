@@ -1,39 +1,74 @@
 <!DOCTYPE html>
 <html lang="en">
-  <head>
-    <title>Resource</title>
 
-    <link rel="stylesheet" href="/vendor/normalize-4.1.1.css" type="text/css" />
-    <link rel="stylesheet" href="/vendor/border-box.css" type="text/css" />
-    <link rel="stylesheet" href="/styles/main.css" type="text/css" />
-    <link rel="stylesheet" href="/styles/layout.css" type="text/css" />
+<head>
+  <title>Resource</title>
 
-    <script type="text/javascript" src="/vendor/jquery-3.0.0.js"></script>
-    <script type="text/javascript" src="/scripts/app.js"></script>
-    <script type="text/javascript" src="/scripts/loginbutton.js"></script>
-  </head>
+  <link rel="stylesheet" href="/vendor/normalize-4.1.1.css" type="text/css" />
+  <link rel="stylesheet" href="/vendor/border-box.css" type="text/css" />
+  <link rel="stylesheet" href="/styles/main.css" type="text/css" />
+  <link rel="stylesheet" href="/styles/layout.css" type="text/css" />
 
-  <body>
-    <%- include('partials/_header') %>
+  <script type="text/javascript" src="/vendor/jquery-3.0.0.js"></script>
+  <script type="text/javascript" src="/scripts/app.js"></script>
+  <script type="text/javascript" src="/scripts/resourceById.js"></script>
+  <script type="text/javascript" src="/scripts/loginbutton.js"></script>
+
+
+</head>
+
+
+
+<body>
+  <%- include('partials/_header') %>
     <main>
-      <h1>RESOURCE TITLE</h1>
+
+      <h1><%= data['title'] %></h1>
       <div class="imageContainer">
-        <img class="resourceImage" />
+        <img class="resourceImage" src="https://imgur.com/aWZvRbG.png">
       </div>
       <div class="resourceInfo">
         <h4>Description</h4>
-        <p>
-          description added here. jjsdfhds asaif asidhdsfjh aksjdhkj asldascb as
-          ljashf a xbjasbd
-        </p>
-        <label for="commentBox" class="commentBox">Comment</label>
-        <input
-          type="text"
-          name="comment"
-          class="commentBoxInput"
-          placeholder="comment"
-        />
+        <p><%= data['description'] %></p>
+        <h4>URL</h4>
+        <p><%= data['url'] %></p>
+        <h6>Created at <%= data['created_at'] %></h6>
+      </br>
+        <div class="rate">
+          <input type="radio" class="ratings_stars" id="star5" name="rate" value="5" />
+          <label for="star5" title="text">5 stars</label>
+          <input type="radio" class="ratings_stars" id="star4" name="rate" value="4" />
+          <label for="star4" title="text">4 stars</label>
+          <input type="radio" class="ratings_stars" id="star3" name="rate" value="3" />
+          <label for="star3" title="text">3 stars</label>
+          <input type="radio" class="ratings_stars" id="star2" name="rate" value="2" />
+          <label for="star2" title="text">2 stars</label>
+          <input type="radio" class="ratings_stars" id="star1" name="rate" value="1" />
+          <label for="star1" title="text">1 star</label>
+        </div>
+
+        </br>
+
+        <div class="like_button_wrapper">
+          <button type="button" id="like_button"
+            class="text-red-700 hover:text-white border border-red-700 hover:bg-red-800 focus:ring-4 focus:outline-none focus:ring-red-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center mr-2 mb-2 dark:border-red-500 dark:text-red-500 dark:hover:text-white dark:hover:bg-red-600 dark:focus:ring-red-900">
+            Like</button>
+        </div>
+        <div class="delete_button_wrapper">
+          <button type="button" id="delete_button"
+            class="text-red-700 hover:text-white border border-red-700 hover:bg-red-800 focus:ring-4 focus:outline-none focus:ring-red-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center mr-2 mb-2 dark:border-red-500 dark:text-red-500 dark:hover:text-white dark:hover:bg-red-600 dark:focus:ring-red-900">
+            DELETE</button>
+        </div>
+        </br>
+        <div class="comment_wrapper">
+        <label for="commentBox" class="commentBox">Comment</label></br>
+        <input type="text" name="comment" class="commentBoxInput" placeholder="comment">
+        <button type="submit" class="submit_comment_button">Comment</button>
       </div>
+      </div>
+
     </main>
-  </body>
+</body>
+
+
 </html>
