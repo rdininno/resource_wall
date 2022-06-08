@@ -16,12 +16,13 @@ module.exports = (db) => {
 
   // Get - resources with 'id'
   router.get("/:id", (req, res) => {
+    const user_id = req.session.user_id;
     const id = req.params.id;
 
     db.query(`select * from resources where id = ${id};`)
       .then((data) => {
         const resource = data.rows[0];
-        res.render("resourcePage", { data: resource });
+        res.render("resourcePage", { data: resource, user: user_id });
         // return resource;
       })
       .catch((err) => {
@@ -31,6 +32,10 @@ module.exports = (db) => {
 
   // Post - ADD resource
   router.post("/", (req, res) => {
+    const user_id = req.session.user_id;
+    if (typeof user_id === "undefined") {
+      return res.send("User not log in");
+    }
     const url = req.body.url;
     const title = req.body.title;
     const description = req.body.description;
@@ -39,14 +44,14 @@ module.exports = (db) => {
     // insert table
     return db
       .query(
-        `INSERT INTO resources (creator_id, title, description, url) VALUES ('1', $1, $2, $3) RETURNING *;`,
-        [title, description, url]
+        `INSERT INTO resources (creator_id, title, description, url) VALUES ($1, $2, $3, $4) RETURNING *;`,
+        [user_id, title, description, url]
       )
       .then((res) => {
         const newResource = res.rows[0];
         return db.query(
-          `INSERT INTO tags (user_id, resource_id, tag) VALUES ('1', $1, $2)`,
-          [newResource.id, tags]
+          `INSERT INTO tags (user_id, resource_id, tag) VALUES ($1, $2, $3)`,
+          [user_id, newResource.id, tags]
         );
       })
       .catch((err) => {

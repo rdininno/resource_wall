@@ -27,12 +27,31 @@ $(document).ready(() => {
 
   // Delete button onclick
   $("#delete_button").on("click", deleteResource);
+
+  // Like  button onclick
+  $("#like_button").on("click", addFavourite);
 });
 
-const deleteResource = function () {
+// Get URL param
+const getPath = function () {
   let resourceId = window.location.pathname;
   resourceId = resourceId.split("/");
   resourceId = resourceId[resourceId.length - 1];
+  return resourceId;
+};
+
+// Add Like to resource
+const addFavourite = function () {
+  let resourceId = getPath();
+  const data = { resource_id: resourceId };
+  $.post(`/favourites/`, { data }).then(() => {
+    window.location = `/`;
+  });
+};
+
+// Delete resource
+const deleteResource = function () {
+  const resourceId = getPath();
   $.post(`/resources/${resourceId}/delete`).then(() => {
     window.location = `/`;
   });
