@@ -15,7 +15,6 @@ module.exports = (db) => {
     WHERE user_id = ${id};`
     )
       .then((data) => {
-        console.log(data.rows);
         return res.send(data.rows);
       })
       .catch((err) => {
