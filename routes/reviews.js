@@ -32,7 +32,7 @@ module.exports = (db) => {
 
     // insert table
     db.query(
-      `INSERT INTO reviews (user_id, resource_id, comment, rating) 
+      `INSERT INTO reviews (user_id, resource_id, comment, rating)
               VALUES (${user_id}, ${resource_id}, ${comment}, ${rating});`
     )
       .then((data) => {
@@ -43,27 +43,21 @@ module.exports = (db) => {
       });
   });
 
-  // Post - Edit reviews
-
+  // Post - review and comment
   router.post("/:id", (req, res) => {
     // and how to grab all data from req
-    const id = req.params.id;
-    const user_id = req.params.id;
-    const resource_id = req.params.resource_id;
-    const comment = req.params.comment;
-    const rating = req.params.rating;
+    const user_id = req.session.user_id;
+    const resourceId = req.params.id;
+    const rating = req.body.rating;
+    const comment = req.body.comment;
 
     // update table
     db.query(
-      `UPDATE reviews 
-        SET user_id = ${user_id}, 
-        resource_id = ${resource_id},
-        comment = ${comment},
-        rating = ${rating}
-    WHERE id = ${id};`
+      `INSERT INTO reviews (resource_id, reviewer_id, rating, comment) VALUES ($1, $2, $3, $4)`,
+      [resourceId, user_id, rating, comment]
     )
       .then((data) => {
-        console.log(data.rows);
+        console.log('successful insert');
       })
       .catch((err) => {
         res.status(500).json({ error: err.message });
@@ -75,7 +69,7 @@ module.exports = (db) => {
     const id = req.params.id;
     //delete query
     db.query(
-      `DELETE FROM reviews 
+      `DELETE FROM reviews
               WHERE id = ${id}`
     )
       .then((data) => {

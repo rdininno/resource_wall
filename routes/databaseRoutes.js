@@ -28,17 +28,5 @@ module.exports = (db) => {
 
   })
 
-  router.post("/review", (req, res) => {
-    queries.resourceRatingQuery(req)
-      .then((data) => {
-        res.json(data);
-      })
-      .catch((err) => {
-        console.log("error, ", err);
-      })
-  }
-
-  );
-
   return router;
 };
