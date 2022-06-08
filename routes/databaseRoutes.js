@@ -36,5 +36,6 @@ module.exports = (db) => {
         console.log("error in searchQuery"), res.send(err);
       });
   });
+
   return router;
 };
