@@ -19,12 +19,12 @@
       <section class="relative container mx-auto-p-6">
         <div class="home_second_nav flex items-center justify-center my-2">
           <button
-            class="my_resources_button bg-reg-red hover:bg-dark-red font-bold py-2 px-4 mr-2 border-b-4 text-cream border-dark-red hover:border-reg-red rounded mr-6"
+            class="my_resources_button bg-reg-red hover:bg-dark-red font-bold py-2 px-4 border-b-4 text-cream border-dark-red hover:border-reg-red rounded mr-6"
           >
             My resources
           </button>
           <button
-            class="my_favourites_button bg-reg-red hover:bg-dark-red font-bold py-2 px-4 mr-2 border-b-4 text-cream border-dark-red hover:border-reg-red rounded ml-6"
+            class="my_favourites_button bg-reg-red hover:bg-dark-red font-bold py-2 px-4 border-b-4 text-cream border-dark-red hover:border-reg-red rounded ml-6"
           >
             My favourites
           </button>
@@ -35,35 +35,8 @@
           <div class="home_title underline text-2xl mb-4">My Resources</div>
         </div>
         <div
-          class="resource_display_container container flex justify-center justify-around flex-wrap"
-        >
-          <article
-            class="resourceContainer flex flex-col border-solid border-4 border-black w-2/5 my-1"
-          >
-            <body>
-              <div class="thumbnailContainer">
-                <img
-                  class="resourceThumbnail"
-                  src="https://imgur.com/aWZvRbG.png"
-                />
-              </div>
-
-              <div class="resourceInfo">
-                <h2 class="resourceTitle">${resource.title}</h2>
-                <div class="resourceDescription">${resource.description}</div>
-
-                <div class="resourceFooter">
-                  <p class="resourceDate">${resource.created_at}</p>
-                  <div class="resourceIcons">
-                    <i class="fa-solid fa-heart"></i>
-                    <i class="fa-solid fa-comment"></i>
-                    <i class="fa-solid fa-star-sharp"></i>
-                  </div>
-                </div>
-              </div>
-            </body>
-          </article>
-        </div>
+          class="resource_display_container container flex justify-around flex-wrap"
+        ></div>
       </section>
     </main>
   </body>
