@@ -1,27 +1,17 @@
 $(document).ready(() => {
-<<<<<<< HEAD
-  $(".ratings_stars").on("click", (event) => {
-    const data = {
-      rating: $(event.target).val(),
-    };
-  });
-});
-
-//will delete
-=======
-  $('#review_form').on('submit', (event) => {
+  $("#review_form").on("submit", (event) => {
     event.preventDefault();
     let resourceId = window.location.pathname;
-    resourceId = resourceId.split('/');
-    resourceId = resourceId[resourceId.length -1];
+    resourceId = resourceId.split("/");
+    resourceId = resourceId[resourceId.length - 1];
 
-    const comment = $('.commentBoxInput').val();
-    let $input = $('#review_form :input');
+    const comment = $(".commentBoxInput").val();
+    let $input = $("#review_form :input");
     let tagValue;
 
-    for(const i of $input) {
-      if(i.type === 'radio') {
-        if(i.checked) {
+    for (const i of $input) {
+      if (i.type === "radio") {
+        if (i.checked) {
           tagValue = i.value;
         }
       }
@@ -29,10 +19,21 @@ $(document).ready(() => {
 
     const data = {
       comment,
-      rating: tagValue
-    }
+      rating: tagValue,
+    };
 
-    $.post(`/reviews/${resourceId}`, data)
-  })
+    $.post(`/reviews/${resourceId}`, data);
+  });
+
+  // Delete button onclick
+  $("#delete_button").on("click", deleteResource);
 });
->>>>>>> 21d78c0f176b8b6e9064e4522250a63af33a50d8
+
+const deleteResource = function () {
+  let resourceId = window.location.pathname;
+  resourceId = resourceId.split("/");
+  resourceId = resourceId[resourceId.length - 1];
+  $.post(`/resources/${resourceId}/delete`).then(() => {
+    window.location = `/`;
+  });
+};

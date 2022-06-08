@@ -14,7 +14,6 @@ module.exports = (db) => {
     res.render("newResource", templateVars);
   });
 
-
   // Get - resources with 'id'
   router.get("/:id", (req, res) => {
     const id = req.params.id;
@@ -22,14 +21,13 @@ module.exports = (db) => {
     db.query(`select * from resources where id = ${id};`)
       .then((data) => {
         const resource = data.rows[0];
-        res.render('resourcePage', {data: resource})
+        res.render("resourcePage", { data: resource });
         // return resource;
       })
       .catch((err) => {
         res.status(500).json({ error: err.message });
       });
   });
-
 
   // Post - ADD resource
   router.post("/", (req, res) => {
@@ -42,17 +40,35 @@ module.exports = (db) => {
     return db
       .query(
         `INSERT INTO resources (creator_id, title, description, url) VALUES ('1', $1, $2, $3) RETURNING *;`,
-        [title, description, url],
-
+        [title, description, url]
       )
       .then((res) => {
         const newResource = res.rows[0];
         return db.query(
           `INSERT INTO tags (user_id, resource_id, tag) VALUES ('1', $1, $2)`,
-        [newResource.id, tags])
+          [newResource.id, tags]
+        );
       })
       .catch((err) => {
         console.log(err);
+        res.status(500).json({ error: err.message });
+      });
+  });
+
+  // Post - Delete resource
+  router.post("/:id/delete", (req, res) => {
+    const id = req.params.id;
+    //delete query
+    console.log("delete listen");
+    db.query(
+      `DELETE FROM resources
+          WHERE id = ${id}`
+    )
+      .then((data) => {
+        console.log("delete success");
+        res.redirect("/users");
+      })
+      .catch((err) => {
         res.status(500).json({ error: err.message });
       });
   });
@@ -66,22 +82,6 @@ module.exports = (db) => {
     db.query(``)
       .then((data) => {
         console.log(data.rows);
-      })
-      .catch((err) => {
-        res.status(500).json({ error: err.message });
-      });
-  });
-
-  // Post - Delete resource
-  router.post("/:id/delete", (req, res) => {
-    const id = req.params.id;
-    //delete query
-    db.query(
-      `DELETE FROM resources
-            WHERE id = ${id}`
-    )
-      .then((data) => {
-        console.log("delete success");
       })
       .catch((err) => {
         res.status(500).json({ error: err.message });
