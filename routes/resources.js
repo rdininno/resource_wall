@@ -62,12 +62,17 @@ module.exports = (db) => {
 
   // Post - Delete resource
   router.post("/:id/delete", (req, res) => {
-    const id = req.params.id;
+    const user_id = req.session.user_id;
+    if (typeof user_id === "undefined") {
+      res.redirect("/");
+    }
+    const resource_id = req.params.id;
     //delete query
     console.log("delete listen");
     db.query(
       `DELETE FROM resources
-          WHERE id = ${id}`
+          WHERE id = ${resource_id}
+          And creator_id = ${user_id}`
     )
       .then((data) => {
         console.log("delete success");
