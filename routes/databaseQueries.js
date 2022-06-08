@@ -16,7 +16,6 @@ module.exports = function (db) {
 
     resourceSearchQuery: (options, limit = 10) => {
       const queryData = options.body.data;
-      console.log("query data", queryData);
       let queryString = `
           SELECT DISTINCT resources.* FROM resources LEFT JOIN tags ON resources.id = tags.resource_id
           WHERE 1=1`;
@@ -53,11 +52,5 @@ module.exports = function (db) {
           return null;
         });
     },
-    // resourceRatingQuery: (ratingData) => {
-    //   const ratingData = ratingData.body.data
-    //   let queryString = `
-    //     INSERT INTO reviews (resource_id,reviewer_id, )
-    //   `
-    // }
   };
 };
