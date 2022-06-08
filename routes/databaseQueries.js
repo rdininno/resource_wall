@@ -53,5 +53,11 @@ module.exports = function (db) {
           return null;
         });
     },
+    // resourceRatingQuery: (ratingData) => {
+    //   const ratingData = ratingData.body.data
+    //   let queryString = `
+    //     INSERT INTO reviews (resource_id,reviewer_id, )
+    //   `
+    // }
   };
 };

@@ -10,6 +10,22 @@ module.exports = (db) => {
   });
 
 
+  // Get - resources with 'id'
+  router.get("/:id", (req, res) => {
+    const id = req.params.id;
+
+    db.query(`select * from resources where id = ${id};`)
+      .then((data) => {
+        const resource = data.rows[0];
+        res.render('resourcePage', {data: resource})
+        // return resource;
+      })
+      .catch((err) => {
+        res.status(500).json({ error: err.message });
+      });
+  });
+
+
   // Post - ADD resource
   router.post("/", (req, res) => {
     const url = req.body.url;
