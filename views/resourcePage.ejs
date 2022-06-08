@@ -24,29 +24,45 @@
 <body>
   <%- include('partials/_header') %>
     <main>
+      <div class="container flex justify-center">
+      <h1 class="text-5xl text-bold underline my-3"><%= data['title'] %></h1>
+    </div>
+      <section class="container flex justify-center justify-around flex-wrap my-4">
 
-      <h1><%= data['title'] %></h1>
       <div class="imageContainer">
         <img class="resourceImage" src="https://imgur.com/aWZvRbG.png">
       </div>
       <div class="resourceInfo">
-        <h4>Description</h4>
-        <p><%= data['description'] %></p>
-        <h4>URL</h4>
-        <p><%= data['url'] %></p>
-        <h6>Created at <%= data['created_at'] %></h6>
+        <div class="border-solid rounded-sm border-black border-2">
+        <h4 class="mx-1 underline">Description</h4>
+        <p class="mx-1"><%= data['description'] %></p>
+        <h4 class="mx-1 underline">URL</h4>
+        <p class="mx-1"><%= data['url'] %></p>
+        <h6 class="mx-1 underline">Created at </h6>
+        <p class="mx-1"><%= data['created_at'] %></p>
       </br>
-        <div class="rate">
-          <input type="radio" class="ratings_stars" id="star5" name="rate" value="5" />
-          <label for="star5" title="text">5 stars</label>
-          <input type="radio" class="ratings_stars" id="star4" name="rate" value="4" />
-          <label for="star4" title="text">4 stars</label>
-          <input type="radio" class="ratings_stars" id="star3" name="rate" value="3" />
-          <label for="star3" title="text">3 stars</label>
-          <input type="radio" class="ratings_stars" id="star2" name="rate" value="2" />
-          <label for="star2" title="text">2 stars</label>
-          <input type="radio" class="ratings_stars" id="star1" name="rate" value="1" />
-          <label for="star1" title="text">1 star</label>
+    </div>
+        <div class="rate flex inline-block justify-between my-3">
+          <div class="inline-flex flex-col flex-wrap justify-center">
+          <input type="radio" class="ratings_stars block place-self-center" id="star5" name="rate" value="5" />
+          <label for="star5" title="text" class="block mx-2">5 stars</label>
+        </div>
+        <div class="inline-flex flex-col flex-wrap justify-center">
+          <input type="radio" class="ratings_stars block place-self-center" id="star4" name="rate" value="4" />
+          <label for="star4" title="text" class="block mx-2">4 stars</label>
+        </div>
+        <div class="inline-flex flex-col flex-wrap justify-center">
+          <input type="radio" class="ratings_stars block place-self-center" id="star3" name="rate" value="3" />
+          <label for="star3" title="text" class="block mx-2">3 stars</label>
+        </div>
+          <div class="inline-flex flex-col flex-wrap justify-center">
+          <input type="radio" class="ratings_stars block place-self-center" id="star2" name="rate" value="2" />
+          <label for="star2" title="text" class="block mx-2">2 stars</label>
+        </div>
+          <div class="inline-flex flex-col flex-wrap justify-center">
+          <input type="radio" class="ratings_stars block place-self-center" id="star1" name="rate" value="1" />
+          <label for="star1" title="text" class="block mx-2">1 star</label>
+        </div>
         </div>
 
         </br>
@@ -64,13 +80,14 @@
         </br>
         <div class="comment_wrapper">
         <label for="commentBox" class="commentBox">Comment</label></br>
-        <input type="text" name="comment" class="commentBoxInput" placeholder="comment">
-        <button type="submit" class="submit_comment_button">Comment</button>
+        <input type="text" name="comment" class="commentBoxInput border-2 border-solid rounded border-black" placeholder="comment">
+        <button type="submit" class="submit_comment_button bg-reg-red hover:bg-dark-red font-bold py-2 px-4 mr-2 border-b-4 text-cream border-dark-red hover:border-reg-red rounded">Comment</button>
 
 
 
       </div>
       </div>
+    </section>
 
 
     </main>
