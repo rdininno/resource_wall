@@ -75,7 +75,7 @@ app.get("/", (req, res) => {
   if (id !== undefined) {
     templateVars = { user: id };
   }
-  console.log(templateVars.user);
+  console.log("from root page cookie", templateVars.user);
   res.render("index", templateVars);
 });
 

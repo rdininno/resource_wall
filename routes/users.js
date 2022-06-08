@@ -30,7 +30,7 @@ module.exports = (db) => {
     const user_id = req.params.id;
     // console.log(`id`, user_id);
     req.session.user_id = user_id;
-    console.log(`id`, req.session.user_id);
+    console.log(`from /users set id`, req.session.user_id);
     res.redirect("/users");
   });
 
