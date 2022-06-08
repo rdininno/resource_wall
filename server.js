@@ -7,6 +7,7 @@ const sassMiddleware = require("./lib/sass-middleware");
 const express = require("express");
 const app = express();
 const morgan = require("morgan");
+const cookieSession = require("cookie-session");
 
 // PG database client/connection setup
 const { Pool } = require("pg");
@@ -31,6 +32,14 @@ app.use(
   })
 );
 
+// User Cookie-session
+app.use(
+  cookieSession({
+    name: "session",
+    keys: ["key1", "key2"],
+  })
+);
+
 app.use(express.static("public"));
 
 // const widgetsRoutes = require("./routes/widgets");
@@ -40,8 +49,6 @@ app.use(express.static("public"));
 const dataRoutes = require("./routes/databaseRoutes.js");
 app.use("/api/explore", dataRoutes(db));
 
-
-
 //Routes for Favorites, Resources, Reviews and tags
 // I keep some route in case will need it for the ajax call in future
 const usersRoutes = require("./routes/users.js");
@@ -50,7 +57,7 @@ const favouritesRoutes = require("./routes/favourites.js");
 const explore = require("./routes/explore.js");
 
 // call route file
-app.use('/explore', explore(db));
+app.use("/explore", explore(db));
 app.use("/users", usersRoutes(db));
 app.use("/resources", resourcesRoutes(db));
 // Need to confirm
@@ -62,6 +69,7 @@ app.use("/favourites", favouritesRoutes(db));
 
 // Direct/render to index page
 app.get("/", (req, res) => {
+  //rediret explore
   res.render("index");
 });
 

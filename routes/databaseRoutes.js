@@ -6,8 +6,8 @@ module.exports = (db) => {
   const queries = require("./databaseQueries")(db);
 
   router.get("/", (req, res) => {
-    // res.json({ test: 123 });
-    queries.getAllResources()
+    queries
+      .getAllResources()
       .then((data) => {
         res.json(data);
       })
@@ -17,14 +17,15 @@ module.exports = (db) => {
   });
 
   router.post("/search", (req, res) => {
-
-    queries.resourceSearchQuery(req)
+    queries
+      .resourceSearchQuery(req)
       .then((data) => {
         res.json(data);
       })
       .catch((err) => {
         console.log("error in searchQuery"), res.send(err);
       });
+
   })
 
   router.post("/review"), (req, res) => {
@@ -36,5 +37,8 @@ module.exports = (db) => {
         console.log("error, ", err);
       })
   }
+
+  });
+
   return router;
 };

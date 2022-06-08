@@ -9,6 +9,7 @@ module.exports = (db) => {
     res.render("newResource");
   });
 
+
   // Get - resources with 'id'
   router.get("/:id", (req, res) => {
     const id = req.params.id;
@@ -23,6 +24,7 @@ module.exports = (db) => {
         res.status(500).json({ error: err.message });
       });
   });
+
 
   // Post - ADD resource
   router.post("/", (req, res) => {
