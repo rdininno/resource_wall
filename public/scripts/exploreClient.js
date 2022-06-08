@@ -2,12 +2,13 @@
 $(document).ready(() => {
   $(".explore_search_form").on("submit", searchSubmit);
   $("#allResources").on("click", loadResources);
-  $('.explore_display_container').on('click', goToResource);
+  $(".explore_display_container").on("click", goToResource);
 });
 
 const goToResource = (evt) => {
-  const resourceId = $(evt.target).parent().attr('id');
-
+  console.log($(evt.target).parent());
+  const resourceId = $(evt.target).parent().attr("id");
+  console.log(resourceId);
   $.get(`/resources/${resourceId}`)
     .then(() => {
       window.location = `/resources/${resourceId}`;
@@ -15,8 +16,7 @@ const goToResource = (evt) => {
     .catch((err) => {
       console.log(`resource with id: ${resourceId} not found. error: `, err);
     });
-
-}
+};
 
 // function to use the form submit data to search for resources and prevent default
 const searchSubmit = (evt) => {
@@ -40,23 +40,24 @@ const searchSubmit = (evt) => {
 
   //send data to server and replace the diplay container with the results
   $.post("api/explore/search", { data }).then((res) => {
-    $(".resourceInfo").replaceWith(renderResources(res));
+    renderResources(res);
   });
   return data;
 };
 
 // function to render the resources
-const renderResources = (resources) => {
-  for (resource of resources) {
+const renderResources = function (resources) {
+  $(".resourceInfo").empty();
+  for (const resource of resources) {
     const $resource = createResourceElement(resource);
-    $(".explore_display_container").append($resource);
+    $(".resourceInfo").append($resource);
   }
 };
 
 // function to load the resources to the page
 const loadResources = () => {
   $.get("api/explore").then((res) => {
-    $(".resourceInfo").replaceWith(renderResources(res));
+    renderResources(res);
   });
 };
 
@@ -66,21 +67,22 @@ function parseDate(input) {
 
 // function to create the html for each resource
 const createResourceElement = (resource) => {
-  const $resource = `<div class="resourceInfo" id="${resource.id}">
-                <h2 class="resourceTitle">${resource.title}</h2>
-                <div class="resourceDescription">${resource.description}</div>
+  const $resource = `<div class="flex flex-col border-solid border-4 border-black w-2/5 my-1" id="${
+    resource.id
+  }">
+  <h2 class="resourceTitle text-4xl">${resource.title}</h2>
+  <div class="resourceDescription">
+    A useful website that has different pages to post
+  </div>
 
-                <div class="resourceFooter">
-                  <p class="resourceDate">${parseDate(resource.created_at)}</p>
-                  <div class="resourceIcons">
-                    <i class="fa-solid fa-heart"></i>
-                    <i class="fa-solid fa-comment"></i>
-                    <i class="fa-solid fa-star-sharp"></i>
-                   </div>
-
-                </div>
-              </div>`;
+  <div class="resourceFooter">
+    <p class="resourceDate">${parseDate(resource.created_at)}</p>
+    <div class="resourceIcons">
+      <i class="fa-solid fa-heart"></i>
+      <i class="fa-solid fa-comment"></i>
+      <i class="fa-solid fa-star-sharp"></i>
+    </div>
+  </div>
+</div>`;
   return $resource;
 };
-
-
