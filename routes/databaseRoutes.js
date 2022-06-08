@@ -28,7 +28,7 @@ module.exports = (db) => {
 
   })
 
-  router.post("/review"), (req, res) => {
+  router.post("/review", (req, res) => {
     queries.resourceRatingQuery(req)
       .then((data) => {
         res.json(data);
@@ -38,7 +38,7 @@ module.exports = (db) => {
       })
   }
 
-  });
+  );
 
   return router;
 };
