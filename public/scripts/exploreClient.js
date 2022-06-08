@@ -84,5 +84,3 @@ const createResourceElement = (resource) => {
 };
 
 
-
-
