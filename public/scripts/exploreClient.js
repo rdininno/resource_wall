@@ -2,7 +2,7 @@
 $(document).ready(() => {
   $(".explore_search_form").on("submit", searchSubmit);
   $("#allResources").on("click", loadResources);
-  $(".explore_display_container").on("click", goToResource);
+  $(".resourceInfo").on("click", goToResource);
 });
 
 const goToResource = (evt) => {
@@ -67,7 +67,7 @@ function parseDate(input) {
 
 // function to create the html for each resource
 const createResourceElement = (resource) => {
-  const $resource = `<div class="flex flex-col border-solid border-4 border-black w-2/5 my-1" id="${
+  const $resource = `<div class="flex flex-col border-solid border-4 border-black w-2/5 my-1 cursor-pointer" id="${
     resource.id
   }">
   <h2 class="resourceTitle text-4xl">${resource.title}</h2>
