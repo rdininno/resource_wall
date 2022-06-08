@@ -20,7 +20,15 @@
         <button id="allResources">Show all</button>
         <form class="explore_search_form" action="/explore">
           <input id="search_value" type="text" placeholder="Search.." />
-          <button class="explore_search_button">Explore</button>
+          <label for="tag">fun</label>
+          <input type="radio" class="tag" value="fun" name="tags" />
+          <label for="tag">education</label>
+          <input type="radio" class="tag" value="education" name="tags" />
+          <label for="tag">videos</label>
+          <input type="radio" class="tag" value="videos" name="tags" />
+          <label for="tag">programming</label>
+          <input type="radio" class="tag" value="programming" name="tags" />
+          <input type="submit" value="Search" class="explore_search_button" />
         </form>
       </div>
 

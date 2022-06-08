@@ -14,20 +14,42 @@ module.exports = (db) => {
     res.render("newResource", templateVars);
   });
 
+
+  // Get - resources with 'id'
+  router.get("/:id", (req, res) => {
+    const id = req.params.id;
+
+    db.query(`select * from resources where id = ${id};`)
+      .then((data) => {
+        const resource = data.rows[0];
+        res.render('resourcePage', {data: resource})
+        // return resource;
+      })
+      .catch((err) => {
+        res.status(500).json({ error: err.message });
+      });
+  });
+
+
   // Post - ADD resource
   router.post("/", (req, res) => {
     const url = req.body.url;
     const title = req.body.title;
     const description = req.body.description;
+    const tags = req.body.tags;
 
     // insert table
     return db
       .query(
-        `INSERT INTO resources (creator_id, title, description, url) VALUES ('1', $1, $2, $3)`,
-        [title, description, url]
+        `INSERT INTO resources (creator_id, title, description, url) VALUES ('1', $1, $2, $3) RETURNING *;`,
+        [title, description, url],
+
       )
       .then((res) => {
-        return res.rows[0];
+        const newResource = res.rows[0];
+        return db.query(
+          `INSERT INTO tags (user_id, resource_id, tag) VALUES ('1', $1, $2)`,
+        [newResource.id, tags])
       })
       .catch((err) => {
         console.log(err);
