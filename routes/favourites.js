@@ -26,16 +26,17 @@ module.exports = (db) => {
   // Post - ADD favourite
   router.post("/", (req, res) => {
     // need to find out how grab data from req
-    const user_id = req.params.id;
-    const resource_id = req.params.resource_id;
+    const user_id = req.session.user_id;
+    const resource_id = req.body.data.resource_id;
 
     // insert table
     db.query(
-      `INSERT INTO favourites (user_id, resource_id) 
+      `INSERT INTO favourites (user_id, resource_id)
               VALUES (${user_id}, ${resource_id});`
     )
       .then((data) => {
-        console.log(data.rows);
+        console.log("Add favourite success");
+        res.redirect("/");
       })
       .catch((err) => {
         res.status(500).json({ error: err.message });
