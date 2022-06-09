@@ -1,4 +1,5 @@
 $(document).ready(() => {
+  $(".commentValidation").toggle();
   $("#review_form").on("submit", addReview);
 
   // Delete button onclick
@@ -10,13 +11,14 @@ $(document).ready(() => {
   // Dislike button onclick
   $("#dislike_button").on("click", removeFavourite);
 
-  $("#edit_resource_form").on("submit", editResource);
-
   $("#edit_button").on("click", showHideEditForm);
 
   //call checklike
   checklike();
 });
+
+
+const showHideEditForm = function () {
 
 // check like
 const checklike = function () {
@@ -46,13 +48,41 @@ showHideEditForm = function () {
   } else {
     $(".resourceInfo").toggle();
     $(".edit_resource_container").prepend(editForm);
+    $("#edit_resource_form").on("submit", editResource);
+    $(".editFormValidation").toggle();
   }
+};
+
+function parseDate(input) {
+  let date = Date.parse(input);
+  date = new Date(date);
+  return date.toLocaleString("en-US");
+}
+
+const formValidation = () => {
+  if (
+    $("#edit_resource_form-description").val() === "" ||
+    $("#edit_resource_form-title").val() === "" ||
+    $("#edit_resource_form-url").val() === "" ||
+    !$("input[type=radio]:checked").length
+  ) {
+    $(".editFormValidation").toggle();
+    setTimeout(() => {
+      $(".editFormValidation").toggle();
+    }, 2000);
+    return false;
+  }
+  return true;
 };
 
 const editResource = (evt) => {
   evt.preventDefault();
   let resourceId = getPath();
   const data = $(evt.target).serialize();
+  if (!formValidation()) {
+    console.log(evt.target, "this is a test");
+    return null;
+  }
 
   $.post(`/resources/${resourceId}`, data)
     .then(() => {
@@ -69,6 +99,13 @@ const addReview = function (event) {
   const comment = $(".commentBoxInput").val();
   let $input = $("#review_form :input");
   let tagValue;
+  if (!$("input[type=radio]:checked").length) {
+    $(".commentValidation").toggle();
+    setTimeout(() => {
+      $(".commentValidation").toggle();
+    }, 2000);
+    return null;
+  }
 
   for (const i of $input) {
     if (i.type === "radio") {
@@ -83,7 +120,13 @@ const addReview = function (event) {
     rating: tagValue,
   };
 
-  $.post(`/reviews/${resourceId}`, data);
+  $.post(`/reviews/${resourceId}`, data)
+    .then(() => {
+      location.reload();
+    })
+    .catch((err) => {
+      console.log("error on add review", err);
+    });
 };
 
 // Get URL param
@@ -126,7 +169,7 @@ const deleteResource = function () {
 const editForm = `<section class="container flex justify-center edit_resource_section">
 
 <div class="edit_resource_form_wrapper">
-  <form actions="/" method="POST" id="edit_resource_form" >
+  <form actions="/resources" method='post' id="edit_resource_form" >
     <div class="flex flex-col justify-center">
     <label for="edit_resource_form-url" class="place-self-center">Link URL</label>
     <input type="url" name="url" placeholder="link url" id="edit_resource_form-url" class="border-solid border-black border-2 rounded">
@@ -176,12 +219,12 @@ const editForm = `<section class="container flex justify-center edit_resource_se
     <label for="tag" class="block mx-2">programming</label>
   </div> <br>
   <div class="flex justify-center">
-    <input type="submit" name="submit" class="edit_resource_submit bg-reg-red hover:bg-dark-red font-bold py-2 px-4 mr-2 border-b-4 text-cream border-dark-red hover:border-reg-red rounded cursor-pointer" value="submit"></input>
+  <input type="submit" name="submit" value="submit" class="edit_resource_form-submit bg-brown hover:bg-dark-red font-bold py-2 px-4 mr-2 border-b-4 border-r-4 text-cream border-dark-cream hover:border-reg-red rounded active:border-0 cursor-pointer" ></input>
   </div>
   </form>
+  <div class="editFormValidation flex justify-center">
+  <h3 class="text-l text-red-600">Please fill out all fields</h3>
+</div>
 
-  <div class="added_alert">
-    <h6 class="alert">edited!</h6>
-  </div>
 </div>
 </section>`;

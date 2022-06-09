@@ -35,7 +35,7 @@ const createResourceElement = (resource) => {
     resource.title
   }</h2>
   <div class="resourceDescription mx-3 my-2">
-    A useful website that has different pages to post
+  ${resource.description}
   </div>
 
   <div class="resourceFooter mx-3 my-2">

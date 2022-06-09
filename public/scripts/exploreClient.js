@@ -74,7 +74,7 @@ const createResourceElement = (resource) => {
   }">
   <h2 class="resourceTitle text-4xl mx-3 my-2 underline">${resource.title}</h2>
   <div class="resourceDescription mx-3 my-2">
-    A useful website that has different pages to post
+    ${resource.description}
   </div>
 
   <div class="resourceFooter mx-3 my-2">
