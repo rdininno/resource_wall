@@ -11,22 +11,26 @@
     <script type="text/javascript" src="/vendor/jquery-3.0.0.js"></script>
     <script type="text/javascript" src="/scripts/indexApp.js"></script>
     <script type="text/javascript" src="/scripts/loginbutton.js"></script>
+    <script
+      src="https://kit.fontawesome.com/17f5e217cf.js"
+      crossorigin="anonymous"
+    ></script>
   </head>
 
   <body class="bg-cream">
     <%- include('partials/_header') %>
     <main>
       <section class="relative container mx-auto-p-6">
-        <div class="home_second_nav flex items-center justify-center my-2">
+        <div class="home_second_nav flex items-center justify-around my-2">
           <button
-            class="my_resources_button bg-brown hover:bg-dark-red font-bold py-2 px-4 mr-2 border-b-4 border-r-4 text-cream border-dark-cream hover:border-reg-red rounded active:border-0 mr-6"
+            class="my_resources_button bg-brown hover:bg-dark-red font-bold py-2 px-4 border-b-4 border-r-4 text-cream border-dark-cream hover:border-reg-red rounded active:border-0 -mr-20"
           >
-            My resources
+            My trees <i class="fa-solid fa-tree text-dark-green"></i>
           </button>
           <button
-            class="my_favourites_button bg-brown hover:bg-dark-red font-bold py-2 px-4 mr-2 border-b-4 border-r-4 text-cream border-dark-cream hover:border-reg-red rounded active:border-0 ml-6"
+            class="my_favourites_button bg-brown hover:bg-dark-red font-bold py-2 px-4 border-b-4 border-r-4 text-cream border-dark-cream hover:border-reg-red rounded active:border-0"
           >
-            My favourites
+            My favourites <i class="fa-solid fa-heart text-red-500"></i>
           </button>
         </div>
       </section>

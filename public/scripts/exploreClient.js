@@ -70,7 +70,7 @@ function parseDate(input) {
 // function to create the html for each resource
 const createResourceElement = (resource) => {
   const $resource = `<div class="resource_container flex flex-col border-solid border-1 border-black w-2/5 my-1 cursor-pointer" id="${
-    resource.id
+    resource.resource_id || resource.id
   }">
   <h2 class="resourceTitle text-4xl mx-3 my-2 underline">${resource.title}</h2>
   <div class="resourceDescription mx-3 my-2">
