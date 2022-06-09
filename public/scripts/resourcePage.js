@@ -10,12 +10,10 @@ $(document).ready(() => {
   // Dislike button onclick
   $("#dislike_button").on("click", removeFavourite);
 
-  $("#edit_resource_form").on("submit", editResource);
-
   $("#edit_button").on("click", showHideEditForm);
 });
 
-showHideEditForm = function () {
+const showHideEditForm = function () {
   console.log($(".edit_resource_container").children("#edit_resource_form"));
 
   if ($(".edit_resource_container").find("#edit_resource_form").length) {
@@ -25,6 +23,8 @@ showHideEditForm = function () {
   } else {
     $(".resourceInfo").toggle();
     $(".edit_resource_container").prepend(editForm);
+    $("#edit_resource_form").on("submit", editResource);
+    $(".editFormValidation").toggle();
   }
 };
 
@@ -34,10 +34,30 @@ function parseDate(input) {
   return date.toLocaleString("en-US");
 }
 
+const formValidation = () => {
+  if (
+    $("#edit_resource_form-description").val() === "" ||
+    $("#edit_resource_form-title").val() === "" ||
+    $("#edit_resource_form-url").val() === "" ||
+    !$("input[type=radio]:checked").length
+  ) {
+    $(".editFormValidation").toggle();
+    setTimeout(() => {
+      $(".editFormValidation").toggle();
+    }, 2000);
+    return false;
+  }
+  return true;
+};
+
 const editResource = (evt) => {
   evt.preventDefault();
   let resourceId = getPath();
   const data = $(evt.target).serialize();
+  if (!formValidation()) {
+    console.log(evt.target, "this is a test");
+    return null;
+  }
 
   $.post(`/resources/${resourceId}`, data)
     .then(() => {
@@ -107,7 +127,7 @@ const deleteResource = function () {
 const editForm = `<section class="container flex justify-center edit_resource_section">
 
 <div class="edit_resource_form_wrapper">
-  <form actions="/" method="POST" id="edit_resource_form" >
+  <form actions="/resources" method='post' id="edit_resource_form" >
     <div class="flex flex-col justify-center">
     <label for="edit_resource_form-url" class="place-self-center">Link URL</label>
     <input type="url" name="url" placeholder="link url" id="edit_resource_form-url" class="border-solid border-black border-2 rounded">
@@ -157,12 +177,12 @@ const editForm = `<section class="container flex justify-center edit_resource_se
     <label for="tag" class="block mx-2">programming</label>
   </div> <br>
   <div class="flex justify-center">
-  <input type="submit" name="submit" class="edit_resource_form-submit bg-brown hover:bg-dark-red font-bold py-2 px-4 mr-2 border-b-4 border-r-4 text-cream border-dark-cream hover:border-reg-red rounded active:border-0 cursor-pointer" value="submit"></input>
+  <input type="submit" name="submit" value="submit" class="edit_resource_form-submit bg-brown hover:bg-dark-red font-bold py-2 px-4 mr-2 border-b-4 border-r-4 text-cream border-dark-cream hover:border-reg-red rounded active:border-0 cursor-pointer" ></input>
   </div>
   </form>
+  <div class="editFormValidation flex justify-center">
+  <h3 class="text-l text-red-600">Please fill out all fields</h3>
+</div>
 
-  <div class="added_alert">
-    <h6 class="alert">edited!</h6>
-  </div>
 </div>
 </section>`;
