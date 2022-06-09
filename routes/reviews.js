@@ -45,8 +45,10 @@ module.exports = (db) => {
 
   // Post - review and comment
   router.post("/:id", (req, res) => {
-    // and how to grab all data from req
     const user_id = req.session.user_id;
+    if (typeof user_id === "undefined") {
+      return res.send("Please log in");
+    }
     const resourceId = req.params.id;
     const rating = req.body.rating;
     const comment = req.body.comment;
@@ -57,7 +59,7 @@ module.exports = (db) => {
       [resourceId, user_id, rating, comment]
     )
       .then((data) => {
-        console.log('successful insert');
+        console.log("successful insert");
       })
       .catch((err) => {
         res.status(500).json({ error: err.message });

@@ -86,7 +86,7 @@ const addFavourite = function () {
 const removeFavourite = function () {
   let resource_id = getPath();
   $.post(`/favourites/${resource_id}/delete`).then(() => {
-    window.location = `/resources/${resource_id}`;
+    window.location.reload();
   });
 };
 

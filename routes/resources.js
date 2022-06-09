@@ -17,6 +17,9 @@ module.exports = (db) => {
   // Get - resources with 'id'
   router.get("/:id", (req, res) => {
     const user_id = req.session.user_id;
+    if (typeof user_id === "undefined") {
+      return res.redirect("/");
+    }
     const id = req.params.id;
     return db
       .query(
@@ -25,7 +28,8 @@ module.exports = (db) => {
       .then((data) => {
         let user_like = data.rows;
         return db
-          .query(`SELECT * FROM resources
+          .query(
+            `SELECT * FROM resources
           LEFT JOIN reviews ON resource_id = resources.id
           JOIN users ON creator_id = users.id
           WHERE resources.id = ${id}
@@ -34,15 +38,16 @@ module.exports = (db) => {
             FROM reviews
             WHERE resource_id = ${id}
             );
-          `)
+          `
+          )
           .then((data) => {
             const resource = data.rows;
 
             let sum = 0;
-            for (const i in resource){
-               sum += resource[i].rating
+            for (const i in resource) {
+              sum += resource[i].rating;
             }
-            let average = (sum/resource.length).toFixed(1);
+            let average = (sum / resource.length).toFixed(1);
 
             templateVars = { average, data: resource, user: user_id };
             for (const ii of user_like) {
