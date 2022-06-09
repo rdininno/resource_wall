@@ -12,6 +12,7 @@ const renderResource = function (resources) {
   $(".resource_display_container").empty();
   //loop thought the new data
   for (let resource of resources) {
+    console.log(resource);
     //call function for each
     let result = createResourceElement(resource);
     //add the resource one by one
@@ -21,12 +22,14 @@ const renderResource = function (resources) {
 
 // Change the Date display
 function parseDate(input) {
-  return new Date(input); // Note: months are 0-based
+  let date = Date.parse(input);
+  date = new Date(date);
+  return date.toLocaleString("en-US");
 }
 
 const createResourceElement = (resource) => {
   const $resource = `<div class="resourceInfo flex flex-col border-solid border-4 border-black w-2/5 my-1 cursor-pointer" id="${
-    resource.id
+    resource.resource_id
   }">
   <h2 class="resourceTitle text-4xl mx-3 my-2 underline decoration-wavy">${
     resource.title

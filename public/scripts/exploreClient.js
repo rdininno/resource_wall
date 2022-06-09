@@ -62,7 +62,9 @@ const loadResources = () => {
 };
 
 function parseDate(input) {
-  return new Date(input); // Note: months are 0-based
+  let date = Date.parse(input);
+  date = new Date(date);
+  return date.toLocaleString("en-US");
 }
 
 // function to create the html for each resource
