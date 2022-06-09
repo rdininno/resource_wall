@@ -17,8 +17,10 @@ module.exports = (db) => {
   // Get - resources with 'id'
   router.get("/:id", (req, res) => {
     const user_id = req.session.user_id;
+    if (typeof user_id === "undefined") {
+      return res.redirect("/");
+    }
     const id = req.params.id;
-    //select resources.*, favourites.user_id as user_like from resources left join favourites on resources.id = resource_id where resources.id = 3
     return db
       .query(
         `select user_id as user_like from favourites where resource_id = ${id};`
@@ -26,7 +28,8 @@ module.exports = (db) => {
       .then((data) => {
         let user_like = data.rows;
         return db
-          .query(`SELECT * FROM resources
+          .query(
+            `SELECT * FROM resources
           LEFT JOIN reviews ON resource_id = resources.id
           JOIN users ON creator_id = users.id
           WHERE resources.id = ${id}
@@ -35,15 +38,16 @@ module.exports = (db) => {
             FROM reviews
             WHERE resource_id = ${id}
             );
-          `)
+          `
+          )
           .then((data) => {
             const resource = data.rows;
 
             let sum = 0;
-            for (const i in resource){
-               sum += resource[i].rating
+            for (const i in resource) {
+              sum += resource[i].rating;
             }
-            let average = (sum/resource.length).toFixed(1);
+            let average = (sum / resource.length).toFixed(1);
 
             templateVars = { average, data: resource, user: user_id };
             for (const ii of user_like) {
@@ -63,7 +67,7 @@ module.exports = (db) => {
   router.post("/", (req, res) => {
     const user_id = req.session.user_id;
     if (typeof user_id === "undefined") {
-      return res.send("User not log in");
+      return res.send("ERROR User not log in");
     }
     const url = req.body.url;
     const title = req.body.title;
@@ -93,7 +97,7 @@ module.exports = (db) => {
   router.post("/:id/delete", (req, res) => {
     const user_id = req.session.user_id;
     if (typeof user_id === "undefined") {
-      res.redirect("/");
+      res.send("ERROR User not log in");
     }
     const resource_id = req.params.id;
     //delete query
@@ -114,6 +118,10 @@ module.exports = (db) => {
 
   // Post Edit resource
   router.post("/:id", (req, res) => {
+    const user_id = req.session.user_id;
+    if (typeof user_id === "undefined") {
+      res.send("ERROR User not log in");
+    }
     const editQuery = `UPDATE resources SET title = $1, description = $2, url = $3 WHERE id = $4 RETURNING *`;
     const editQueryParams = [
       req.body.title,

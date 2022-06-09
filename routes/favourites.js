@@ -5,9 +5,12 @@ const express = require("express");
 const router = express.Router();
 
 module.exports = (db) => {
-  // GET -  Favourite by ID(from cookie session)
+  // GET -  Favourite by user ID(from cookie session)
   router.get("/", (req, res) => {
     const id = req.session.user_id;
+    if (typeof user_id === "undefined") {
+      return res.send("Please log in");
+    }
     db.query(
       `SELECT * 
     FROM resources 
