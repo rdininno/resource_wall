@@ -30,58 +30,48 @@
         </h1>
       </div>
       <section class="container flex justify-around flex-wrap my-4">
-
-        <div class="imageContainer">
-          <img class="resourceImage" src="https://imgur.com/aWZvRbG.png">
-        </div>
-
-
         <div class="edit_resource_container">
-
           <span class="average_rating">
             <h6>Average rating: <%= average %> stars</h6>
-            </span>
-        <div class="resourceInfo">
-          <div class="border-solid rounded-sm border-black border-2">
-            <h4 class="mx-1 underline">Description</h4>
-            <p class="mx-1">
-              <%= data[0]['description'] %>
-            </p>
-            <h4 class="mx-1 underline">URL</h4>
-            <a href="<%= data['url'] %>" class="mx-1">
-              <%= data[0]['url'] %>
-            </a>
-            <h6 class="mx-1 underline">Created at </h6>
-            <p class="mx-1">
-              <%function parseDate(input) {
-                let date = Date.parse(input);
-                date = new Date(date);
-                return date.toLocaleString("en-US");
-              }%>
-              <%= parseDate(data[0]['created_at']) %>
-            </p>
-            </br>
+          </span>
+          <div class="resourceInfo">
+            <div class="border-solid rounded-sm border-black border-2">
+              <h4 class="resource_item_title mx-1 underline">Description</h4>
+              <p class="resource_item_description mx-1">
+                <%= data[0]['description'] %>
+              </p>
+              <h4 class="resource_item_title mx-1 underline">URL</h4>
+              <a href="<%= data['url'] %>" class="resource_item_url mx-1">
+                <%= data[0]['url'] %>
+              </a>
+              <h6 class="resource_item_subtitle mx-1 underline">Created at </h6>
+              <p class="resource_item_creator mx-1">
+                <%function parseDate(input) {
+                  let date = Date.parse(input);
+                  date = new Date(date);
+                  return date.toLocaleString("en-US");
+                }%>
+                <%= parseDate(data[0]['created_at']) %>
+              </p>
+              </br>
+            </div>
           </div>
-
-        </div>
-
-
           </br>
 
           <div class="container flex justify-around">
-           
+
             <div class="like_button_wrapper">
               <button type="button" id="like_button"
                 class="text-red-700 hover:text-white border border-red-700 hover:bg-red-800 focus:ring-4 focus:outline-none focus:ring-red-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center mr-2 mb-2 dark:border-red-500 dark:text-red-500 dark:hover:text-white dark:hover:bg-red-600 dark:focus:ring-red-900">
                 Like</button>
             </div>
-          
-              <div class="dislike_button_wrapper">
+
+            <div class="dislike_button_wrapper">
               <button type="button" id="dislike_button"
                 class="text-red-700 hover:text-white border border-red-700 hover:bg-red-800 focus:ring-4 focus:outline-none focus:ring-red-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center mr-2 mb-2 dark:border-red-500 dark:text-red-500 dark:hover:text-white dark:hover:bg-red-600 dark:focus:ring-red-900">
                 Dislike</button>
             </div>
-          
+
 
 
             <% if (Number(user)===data[0]['creator_id']) {%>
@@ -91,15 +81,19 @@
                   EDIT</button>
               </div>
               <div class="delete_button_wrapper">
-              <button type="button" id="delete_button"
-                class="text-red-700 hover:text-white border border-red-700 hover:bg-red-800 focus:ring-4 focus:outline-none focus:ring-red-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center mr-2 mb-2 dark:border-red-500 dark:text-red-500 dark:hover:text-white dark:hover:bg-red-600 dark:focus:ring-red-900">
-                DELETE</button>
-            </div>
-            <%}%>
+                <button type="button" id="delete_button"
+                  class="text-red-700 hover:text-white border border-red-700 hover:bg-red-800 focus:ring-4 focus:outline-none focus:ring-red-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center mr-2 mb-2 dark:border-red-500 dark:text-red-500 dark:hover:text-white dark:hover:bg-red-600 dark:focus:ring-red-900">
+                  DELETE</button>
+              </div>
+              <%}%>
 
           </div>
           </br>
+
           <form id="review_form" method="post">
+            <div class="review-title-wrapper">
+              <h2 class="review_title">Leave a review</h2>
+            </div>
             <div class="rate inline-flex justify-between my-3 w-full">
               <div class="inline-flex flex-col flex-wrap justify-center">
                 <input type="radio" class="ratings_stars block place-self-center" id="star5" name="rate" value="5" />
@@ -124,9 +118,9 @@
             </div>
             <div class="comment_wrapper">
               </br>
-              <div class="flex justify-around">
-                <input type="text" name="comment" class="commentBoxInput border-2 border-solid rounded border-black break-normal"
-                  placeholder="comment">
+              <div class="comment_box_wrapper flex justify-around">
+                <textarea type="text" name="comment" class="commentBoxInput border-2 border-solid rounded border-black"
+                  placeholder="comment"></textarea>
                 <button type="submit"
                   class="submit_comment_button bg-brown hover:bg-dark-red font-bold py-2 px-4 mr-2 border-b-4 border-r-4 text-cream border-dark-cream hover:border-reg-red rounded active:border-0">submit</button>
               </div>
@@ -140,22 +134,20 @@
         </div>
 
       </section>
-      <div class="flex justify-center text-lg underline">
-        <h2 class="comment-title">COMMENTS</h2>
-      </div>
-      <section id="comments" class="flex justify-center">
 
+      <section id="comments">
+        <h2 class="comment-title">Comments</h2>
         <% if (data[0].comment) {%>
-        <% for (let i=data.length - 1; i>= 0; i--) { %>
-          <div class="comment_container">
-            <%= data[i].comment %> -- <%= data[i].rating %> stars
-                </br>
-                <p>left by: <%= data[i].name %> on <%= parseDate(data[i].created_at) %>
-                </p>
-          </div>
-          </br>
-          <% } %>
-          <% } %>
+          <% for (let i=data.length - 1; i>= 0; i--) { %>
+            <div class="comment_container">
+              <p class="comment_text"><%= data[i].comment %> --  <strong><%= data[i].rating %> stars</strong> </p>
+                  </br>
+                  <p class="comment_footer"><strong>left by: </strong><%= data[i].name %> <strong>on </strong><%= parseDate(data[i].created_at) %>
+                  </p>
+            </div>
+            </br>
+            <% } %>
+              <% } %>
       </section>
 
 
