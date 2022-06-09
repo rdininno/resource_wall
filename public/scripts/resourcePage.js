@@ -21,14 +21,11 @@ $(document).ready(() => {
 const checklike = function () {
   let resourceId = getPath();
   $.get(`/favourites/${resourceId}/like`).then((data) => {
-    console.log(data);
     if (data.user_id !== "usernolike" && data.user_id !== "nologin") {
       $(".like_button_wrapper").toggle();
     } else if (data.user_id === "usernolike") {
-      console.log("not like by user");
       $(".dislike_button_wrapper").toggle();
     } else if (data.user_id === "nologin") {
-      console.log("no user");
       $(".like_button_wrapper").toggle();
       $(".dislike_button_wrapper").toggle();
     }
@@ -77,7 +74,6 @@ const editResource = (evt) => {
   let resourceId = getPath();
   const data = $(evt.target).serialize();
   if (!formValidation()) {
-    console.log(evt.target, "this is a test");
     return null;
   }
 
@@ -117,13 +113,29 @@ const addReview = function (event) {
     rating: tagValue,
   };
 
+  // Work from here
   $.post(`/reviews/${resourceId}`, data)
-    .then(() => {
-      location.reload();
+    .then((res) => {
+      // console.log(true);
+      // console.log("suh dude", res);
+      // console.log(res.value.name);
+      $("#comments").append(showComment(res));
+      $("#review_form").trigger("reset");
     })
     .catch((err) => {
       console.log("error on add review", err);
     });
+};
+// <%= parseDate(data[i].created_at) %>
+// Comment template
+const showComment = function (data) {
+  $result = `<div class="comment_container">
+        ${data.value.comment}  -- ${data.value.rating} stars
+        </br>
+        <p>left by: ${data.value.name}</p>
+        </div>
+        </br>`;
+  return $result;
 };
 
 // Get URL param
@@ -139,7 +151,6 @@ const addFavourite = function () {
   let resourceId = getPath();
   const data = { resource_id: resourceId };
   $.post(`/favourites/`, { data }).then(() => {
-    // window.location.reload();
     $(".like_button_wrapper").toggle();
     $(".dislike_button_wrapper").toggle();
   });
@@ -149,7 +160,6 @@ const addFavourite = function () {
 const removeFavourite = function () {
   let resource_id = getPath();
   $.post(`/favourites/${resource_id}/delete`).then(() => {
-    // window.location.reload();
     $(".like_button_wrapper").toggle();
     $(".dislike_button_wrapper").toggle();
   });
