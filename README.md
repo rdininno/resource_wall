@@ -16,8 +16,8 @@
 - database: `your-database`
 
 3. Install dependencies: `npm i`
-4. Fix to binaries for sass: `npm rebuild node-sass`
-5. Reset database: `npm run db:reset`
+4. Reset database: `npm run db:reset`
+5. Run tailwindcss: `npm run build`
 
 - Check the db folder to see what gets created and seeded in the SDB
 
