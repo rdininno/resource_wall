@@ -56,7 +56,7 @@ const showMyResource = function () {
     type: "GET",
     url: `/users`,
     success: function (data) {
-      $(".home_title").text("My Resources");
+      $(".home_title").text("My Trees");
       renderResource(data);
     },
   });
