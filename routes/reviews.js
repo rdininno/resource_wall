@@ -65,6 +65,7 @@ module.exports = (db) => {
       )
       .then((data) => {
         const value = data.rows[0];
+        console.log(value);
         res.json({ value });
       })
       .catch((err) => {
