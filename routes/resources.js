@@ -88,7 +88,7 @@ module.exports = (db) => {
     db.query(
       `DELETE FROM resources
           WHERE id = ${resource_id}
-          And creator_id = ${user_id}`
+          AND creator_id = ${user_id}`
     )
       .then((data) => {
         console.log("delete success");

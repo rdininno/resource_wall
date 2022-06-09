@@ -7,6 +7,9 @@ $(document).ready(() => {
   // Like  button onclick
   $("#like_button").on("click", addFavourite);
 
+  // Dislike button onclick
+  $("#dislike_button").on("click", removeFavourite);
+
   $("#edit_resource_form").on("submit", editResource);
 });
 
@@ -60,7 +63,15 @@ const addFavourite = function () {
   let resourceId = getPath();
   const data = { resource_id: resourceId };
   $.post(`/favourites/`, { data }).then(() => {
-    window.location = `/`;
+    window.location.reload();
+  });
+};
+
+// Remove Like
+const removeFavourite = function () {
+  let resource_id = getPath();
+  $.post(`/favourites/${resource_id}/delete`).then(() => {
+    window.location = `/resources/${resource_id}`;
   });
 };
 

@@ -24,7 +24,7 @@ module.exports = (db) => {
 
   // Post - ADD favourite
   router.post("/", (req, res) => {
-    // need to find out how grab data from req
+    // Check user logged in
     const user_id = req.session.user_id;
     if (typeof user_id === "undefined") {
       return res.send("Please log in");
@@ -35,9 +35,9 @@ module.exports = (db) => {
       `INSERT INTO favourites (user_id, resource_id)
               VALUES (${user_id}, ${resource_id});`
     )
-      .then((data) => {
+      .then(() => {
         console.log("Add favourite success");
-        res.redirect("/");
+        res.redirect(`/resources/${resource_id}`);
       })
       .catch((err) => {
         res.status(500).json({ error: err.message });
@@ -46,14 +46,21 @@ module.exports = (db) => {
 
   // Post - Delete favourite
   router.post("/:id/delete", (req, res) => {
-    const id = req.params.id;
+    // Check user logged in
+    const user_id = req.session.user_id;
+    if (typeof user_id === "undefined") {
+      return res.send("Please log in");
+    }
+    const resource_id = req.params.id;
     //delete query
     db.query(
-      `DELETE FROM favourite 
-              WHERE id = ${id}`
+      `DELETE FROM favourites
+              WHERE resource_id = ${resource_id}
+              AND user_id = ${user_id}`
     )
-      .then((data) => {
-        console.log("delete success");
+      .then(() => {
+        console.log("Delete favourite success");
+        res.redirect(`/resources/${resource_id}`);
       })
       .catch((err) => {
         res.status(500).json({ error: err.message });
