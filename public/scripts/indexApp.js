@@ -1,13 +1,6 @@
-// Load data from database by calling resource route
+// // Load data from database by calling resource route
 const loadResources = function () {
   $.get(`/users`, { method: "GET" }).then((data) => {
-    renderResource(data);
-  });
-};
-
-// Load data from database by calling favourite route
-const loadfavourite = function () {
-  $.get(`/favourites`, { method: "GET" }).then((data) => {
     renderResource(data);
   });
 };
@@ -59,9 +52,9 @@ const showMyResource = function () {
   $.ajax({
     type: "GET",
     url: `/users`,
-    success: function () {
+    success: function (data) {
       $(".home_title").text("My Resources");
-      loadResources();
+      renderResource(data);
     },
   });
 };
@@ -70,10 +63,10 @@ const showMyResource = function () {
 const showMyFavourites = function () {
   $.ajax({
     type: "GET",
-    url: `/favourites`,
-    success: function () {
+    url: "/favourites",
+    success: function (data) {
       $(".home_title").text("My Favourites");
-      loadfavourite();
+      renderResource(data);
     },
   });
 };
