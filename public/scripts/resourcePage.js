@@ -17,9 +17,6 @@ $(document).ready(() => {
   checklike();
 });
 
-
-const showHideEditForm = function () {
-
 // check like
 const checklike = function () {
   let resourceId = getPath();
@@ -38,7 +35,7 @@ const checklike = function () {
   });
 };
 
-showHideEditForm = function () {
+const showHideEditForm = function () {
   console.log($(".edit_resource_container").children("#edit_resource_form"));
 
   if ($(".edit_resource_container").find("#edit_resource_form").length) {
