@@ -8,14 +8,12 @@ module.exports = (db) => {
   router.get("/:id", (req, res) => {
     const id = req.params.id;
     // send res for testing
-    res.send(`hello: id ${id}`);
-    console.log(`hello from Reviews: id ${id}`);
 
     db.query(`SELECT * FROM reviews WHERE id = ${id};`)
       .then((data) => {
         const tag = data.rows; // will return array of object
-
         console.log(tag);
+        return;
       })
       .catch((err) => {
         res.status(500).json({ error: err.message });
@@ -38,7 +36,7 @@ module.exports = (db) => {
               VALUES (${user_id}, ${resource_id}, ${comment}, ${rating});`
       )
       .then((data) => {
-        console.log(data.rows);
+        return;
       })
       .catch((err) => {
         res.status(500).json({ error: err.message });
@@ -46,7 +44,7 @@ module.exports = (db) => {
   });
 
   // Post - review and comment
-  router.post("/:id", (req, res) => {
+  router.post("/:id", async (req, res) => {
     const user_id = req.session.user_id;
     if (typeof user_id === "undefined") {
       return res.send("Please log in");
@@ -55,17 +53,22 @@ module.exports = (db) => {
     const rating = req.body.rating;
     const comment = req.body.comment;
 
-    // update table
-    db.query(
-      `INSERT INTO reviews (resource_id, reviewer_id, rating, comment) VALUES ($1, $2, $3, $4)`,
+    const insertQuery = await db.query(
+      `INSERT INTO reviews (resource_id, reviewer_id, rating, comment) VALUES ($1, $2, $3, $4) RETURNING *`,
       [resourceId, user_id, rating, comment]
-    )
+    );
+    console.log(insertQuery.rows[0]);
+
+    return db
+      .query(
+        `SELECT * FROM reviews JOIN users ON reviews.reviewer_id = users.id WHERE reviews.id = ${insertQuery.rows[0].id}`
+      )
       .then((data) => {
-        console.log("successful insert");
-        res.redirect(`/resources/${resourceId}`);
+        const value = data.rows[0];
+        res.json({ value });
       })
       .catch((err) => {
-        res.status(500).json({ error: err.message });
+        "error", err.message;
       });
   });
 
