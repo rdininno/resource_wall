@@ -39,15 +39,19 @@ module.exports = (db) => {
           .then((data) => {
             const resource = data.rows;
 
-            templateVars = { data: resource, user: user_id };
+            let sum = 0;
+            for (const i in resource){
+               sum += resource[i].rating
+            }
+            let average = (sum/resource.length).toFixed(1);
+
+            templateVars = { average, data: resource, user: user_id };
             for (const ii of user_like) {
               if (ii.user_like == user_id) {
                 templateVars["like"] = ii.user_like;
               }
             }
-            console.log("passing data", templateVars);
             res.render("resourcePage", templateVars);
-            // return resource;
           });
       })
       .catch((err) => {
