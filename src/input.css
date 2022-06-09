@@ -2,11 +2,15 @@
 @tailwind components;
 @tailwind utilities;
 
-
 /* ROBERT CSS ADDITION */
 
 body {
   background-color: #fdf6e9;
+}
+
+body,
+html {
+  background: #fdf6e8;
 }
 
 nav.relative.container.mx-auto.p-6.bg-dark-green.rounded-b-lg {
@@ -51,7 +55,13 @@ h2.comment-title {
   font-weight: bold;
   color: #fbe3b4;
   margin-bottom: 10px;
-  text-shadow: 1px 1px 0 #355a3f, -1px 1px 0 #355a3f, 1px -1px 0 #000, -1px -1px 0 #b69e77, 0px 1px 0 #fbe3b4, 0px -1px 0 #000, -1px 0px 0 #b69e77, 1px 0px 0 #000, 2px 2px 0 #000, -2px 2px 0 #000, 2px -2px 0 #000, -2px -2px 0 #000, 0px 2px 0 #000, 0px -2px 0 #000, -2px 0px 0 #000, 2px 0px 0 #000, 1px 2px 0 #000, -1px 2px 0 #000, 1px -2px 0 #000, -1px -2px 0 #000, 2px 1px 0 #000, -2px 1px 0 #000, 2px -1px 0 #000, -2px -1px 0 #000;
+  text-shadow: 1px 1px 0 #355a3f, -1px 1px 0 #355a3f, 1px -1px 0 #000,
+    -1px -1px 0 #b69e77, 0px 1px 0 #fbe3b4, 0px -1px 0 #000, -1px 0px 0 #b69e77,
+    1px 0px 0 #000, 2px 2px 0 #000, -2px 2px 0 #000, 2px -2px 0 #000,
+    -2px -2px 0 #000, 0px 2px 0 #000, 0px -2px 0 #000, -2px 0px 0 #000,
+    2px 0px 0 #000, 1px 2px 0 #000, -1px 2px 0 #000, 1px -2px 0 #000,
+    -1px -2px 0 #000, 2px 1px 0 #000, -2px 1px 0 #000, 2px -1px 0 #000,
+    -2px -1px 0 #000;
 }
 
 .comment_container {
@@ -113,20 +123,38 @@ button#delete_button:hover {
 .header_logo.pt-1.text-white.font-bold {
   font-size: 25px;
   color: #fbe3b4;
-  text-shadow: 1px 1px 0 #355a3f, -1px 1px 0 #355a3f, 1px -1px 0 #000, -1px -1px 0 #b69e77, 0px 1px 0 #fbe3b4, 0px -1px 0 #000, -1px 0px 0 #b69e77, 1px 0px 0 #000, 2px 2px 0 #000, -2px 2px 0 #000, 2px -2px 0 #000, -2px -2px 0 #000, 0px 2px 0 #000, 0px -2px 0 #000, -2px 0px 0 #000, 2px 0px 0 #000, 1px 2px 0 #000, -1px 2px 0 #000, 1px -2px 0 #000, -1px -2px 0 #000, 2px 1px 0 #000, -2px 1px 0 #000, 2px -1px 0 #000, -2px -1px 0 #000;
+  text-shadow: 1px 1px 0 #355a3f, -1px 1px 0 #355a3f, 1px -1px 0 #000,
+    -1px -1px 0 #b69e77, 0px 1px 0 #fbe3b4, 0px -1px 0 #000, -1px 0px 0 #b69e77,
+    1px 0px 0 #000, 2px 2px 0 #000, -2px 2px 0 #000, 2px -2px 0 #000,
+    -2px -2px 0 #000, 0px 2px 0 #000, 0px -2px 0 #000, -2px 0px 0 #000,
+    2px 0px 0 #000, 1px 2px 0 #000, -1px 2px 0 #000, 1px -2px 0 #000,
+    -1px -2px 0 #000, 2px 1px 0 #000, -2px 1px 0 #000, 2px -1px 0 #000,
+    -2px -1px 0 #000;
 }
 
-h1{
+h1 {
   font-size: 25px;
   color: #fbe3b4;
-  text-shadow: 1px 1px 0 #355a3f, -1px 1px 0 #355a3f, 1px -1px 0 #000, -1px -1px 0 #b69e77, 0px 1px 0 #fbe3b4, 0px -1px 0 #000, -1px 0px 0 #b69e77, 1px 0px 0 #000, 2px 2px 0 #000, -2px 2px 0 #000, 2px -2px 0 #000, -2px -2px 0 #000, 0px 2px 0 #000, 0px -2px 0 #000, -2px 0px 0 #000, 2px 0px 0 #000, 1px 2px 0 #000, -1px 2px 0 #000, 1px -2px 0 #000, -1px -2px 0 #000, 2px 1px 0 #000, -2px 1px 0 #000, 2px -1px 0 #000, -2px -1px 0 #000;
+  text-shadow: 1px 1px 0 #355a3f, -1px 1px 0 #355a3f, 1px -1px 0 #000,
+    -1px -1px 0 #b69e77, 0px 1px 0 #fbe3b4, 0px -1px 0 #000, -1px 0px 0 #b69e77,
+    1px 0px 0 #000, 2px 2px 0 #000, -2px 2px 0 #000, 2px -2px 0 #000,
+    -2px -2px 0 #000, 0px 2px 0 #000, 0px -2px 0 #000, -2px 0px 0 #000,
+    2px 0px 0 #000, 1px 2px 0 #000, -1px 2px 0 #000, 1px -2px 0 #000,
+    -1px -2px 0 #000, 2px 1px 0 #000, -2px 1px 0 #000, 2px -1px 0 #000,
+    -2px -1px 0 #000;
 }
 
 h2.review_title {
   text-align: center;
   font-size: 26px;
   color: #fbe3b4;
-  text-shadow: 1px 1px 0 #355a3f, -1px 1px 0 #355a3f, 1px -1px 0 #000, -1px -1px 0 #b69e77, 0px 1px 0 #fbe3b4, 0px -1px 0 #000, -1px 0px 0 #b69e77, 1px 0px 0 #000, 2px 2px 0 #000, -2px 2px 0 #000, 2px -2px 0 #000, -2px -2px 0 #000, 0px 2px 0 #000, 0px -2px 0 #000, -2px 0px 0 #000, 2px 0px 0 #000, 1px 2px 0 #000, -1px 2px 0 #000, 1px -2px 0 #000, -1px -2px 0 #000, 2px 1px 0 #000, -2px 1px 0 #000, 2px -1px 0 #000, -2px -1px 0 #000;
+  text-shadow: 1px 1px 0 #355a3f, -1px 1px 0 #355a3f, 1px -1px 0 #000,
+    -1px -1px 0 #b69e77, 0px 1px 0 #fbe3b4, 0px -1px 0 #000, -1px 0px 0 #b69e77,
+    1px 0px 0 #000, 2px 2px 0 #000, -2px 2px 0 #000, 2px -2px 0 #000,
+    -2px -2px 0 #000, 0px 2px 0 #000, 0px -2px 0 #000, -2px 0px 0 #000,
+    2px 0px 0 #000, 1px 2px 0 #000, -1px 2px 0 #000, 1px -2px 0 #000,
+    -1px -2px 0 #000, 2px 1px 0 #000, -2px 1px 0 #000, 2px -1px 0 #000,
+    -2px -1px 0 #000;
 }
 
 .comment_box_wrapper.flex.justify-around {
@@ -151,26 +179,26 @@ input.edit_resource_submit.bg-brown.hover\:bg-dark-red.font-bold.py-2.px-4.mr-2.
   width: 75%;
 }
 
-h4.resource_item_title{
+h4.resource_item_title {
   font-weight: bold;
   color: #355a3f;
-  margin-top:10px;
+  margin-top: 10px;
 }
 
 p.resource_item_creator {
   font-size: 11px;
 }
 
-h6.resource_item_subtitle{
+h6.resource_item_subtitle {
   font-size: 12px;
   font-weight: bold;
   color: #355a3f;
-  margin-top:10px;
+  margin-top: 10px;
 }
 
 button#edit_button:focus {
-  --tw-ring-shadow: var(--tw-ring-inset) 0 0 0 calc(4px + var(--tw-ring-offset-width))   #355a3f;
-  ;
+  --tw-ring-shadow: var(--tw-ring-inset) 0 0 0
+    calc(4px + var(--tw-ring-offset-width)) #355a3f;
 }
 
 .edit_resource_container {
@@ -257,7 +285,7 @@ button.my_favourites_button {
   margin: 20px auto;
 }
 
-.border-black{
+.border-black {
   flex-direction: row;
   justify-content: space-between;
   align-items: center;
@@ -289,7 +317,7 @@ h1.explore_display_container.underline.text-2xl.mb-4 {
   font-size: 40px;
 }
 
-.border-black:hover{
+.border-black:hover {
   background-color: #cedcd1;
   color: #355a3f;
 }
@@ -346,15 +374,19 @@ textarea.commentBoxInput:hover {
   color: black;
 }
 
-.edit_resource_container .resourceInfo .border-solid.rounded-sm.border-black.border-2:hover {
+.edit_resource_container
+  .resourceInfo
+  .border-solid.rounded-sm.border-black.border-2:hover {
   background: #fdf6e9;
   color: black;
 }
 
-.edit_resource_container .resourceInfo{
+.edit_resource_container .resourceInfo {
   background-color: #cedcd1;
 }
 
-.edit_resource_container .resourceInfo .border-solid.rounded-sm.border-black.border-2{
+.edit_resource_container
+  .resourceInfo
+  .border-solid.rounded-sm.border-black.border-2 {
   background: #fdf6e9;
 }
