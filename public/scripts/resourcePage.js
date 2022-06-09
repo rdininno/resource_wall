@@ -77,7 +77,6 @@ const editResource = (evt) => {
   let resourceId = getPath();
   const data = $(evt.target).serialize();
   if (!formValidation()) {
-    console.log(evt.target, "this is a test");
     return null;
   }
 
@@ -118,8 +117,9 @@ const addReview = function (event) {
   };
 
   $.post(`/reviews/${resourceId}`, data)
-    .then(() => {
-      location.reload();
+    .then((res) => {
+      console.log(true);
+      console.log("suh dude", res);
     })
     .catch((err) => {
       console.log("error on add review", err);
@@ -139,7 +139,6 @@ const addFavourite = function () {
   let resourceId = getPath();
   const data = { resource_id: resourceId };
   $.post(`/favourites/`, { data }).then(() => {
-    // window.location.reload();
     $(".like_button_wrapper").toggle();
     $(".dislike_button_wrapper").toggle();
   });
@@ -149,7 +148,6 @@ const addFavourite = function () {
 const removeFavourite = function () {
   let resource_id = getPath();
   $.post(`/favourites/${resource_id}/delete`).then(() => {
-    // window.location.reload();
     $(".like_button_wrapper").toggle();
     $(".dislike_button_wrapper").toggle();
   });
