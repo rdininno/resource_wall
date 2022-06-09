@@ -4,7 +4,7 @@ $(document).ready(() => {
   $("#create_new_resource_form").on("submit", newResourceFormSubmit);
 });
 
-newResourceFormSubmit = (event) => {
+const newResourceFormSubmit = (event) => {
   event.preventDefault();
 
   if (!formValidation()) {
@@ -22,8 +22,8 @@ newResourceFormSubmit = (event) => {
 const formValidation = () => {
   if (
     $("#create_new_resource_form-description").val() === "" ||
-    $("#create_new_resource_form-tile").val() === "" ||
-    $("#create_new_resource_form-description").val() === "" ||
+    $("#create_new_resource_form-title").val() === "" ||
+    $("#create_new_resource_form-url").val() === "" ||
     !$("input[type=radio]:checked").length
   ) {
     $(".formValidation").toggle();
