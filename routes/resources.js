@@ -18,12 +18,28 @@ module.exports = (db) => {
   router.get("/:id", (req, res) => {
     const user_id = req.session.user_id;
     const id = req.params.id;
-
-    db.query(`select * from resources where id = ${id};`)
+    //select resources.*, favourites.user_id as user_like from resources left join favourites on resources.id = resource_id where resources.id = 3
+    return db
+      .query(
+        `select user_id as user_like from favourites where resource_id = ${id};`
+      )
       .then((data) => {
-        const resource = data.rows[0];
-        res.render("resourcePage", { data: resource, user: user_id });
-        // return resource;
+        let user_like = data.rows;
+        return db
+          .query(`select * from resources where id = ${id};`)
+          .then((data) => {
+            const resource = data.rows[0];
+
+            templateVars = { data: resource, user: user_id };
+            for (const ii of user_like) {
+              if (ii.user_like == user_id) {
+                templateVars["like"] = ii.user_like;
+              }
+            }
+            console.log("passing data", templateVars);
+            res.render("resourcePage", templateVars);
+            // return resource;
+          });
       })
       .catch((err) => {
         res.status(500).json({ error: err.message });
@@ -72,7 +88,7 @@ module.exports = (db) => {
     db.query(
       `DELETE FROM resources
           WHERE id = ${resource_id}
-          And creator_id = ${user_id}`
+          AND creator_id = ${user_id}`
     )
       .then((data) => {
         console.log("delete success");
