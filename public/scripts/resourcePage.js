@@ -13,7 +13,28 @@ $(document).ready(() => {
   $("#edit_resource_form").on("submit", editResource);
 
   $("#edit_button").on("click", showHideEditForm);
+
+  //call checklike
+  checklike();
 });
+
+// check like
+const checklike = function () {
+  let resourceId = getPath();
+  $.get(`/favourites/${resourceId}/like`).then((data) => {
+    console.log(data);
+    if (data.user_id !== "usernolike" && data.user_id !== "nologin") {
+      $(".like_button_wrapper").toggle();
+    } else if (data.user_id === "usernolike") {
+      console.log("not like by user");
+      $(".dislike_button_wrapper").toggle();
+    } else if (data.user_id === "nologin") {
+      console.log("no user");
+      $(".like_button_wrapper").toggle();
+      $(".dislike_button_wrapper").toggle();
+    }
+  });
+};
 
 showHideEditForm = function () {
   console.log($(".edit_resource_container").children("#edit_resource_form"));
@@ -78,7 +99,9 @@ const addFavourite = function () {
   let resourceId = getPath();
   const data = { resource_id: resourceId };
   $.post(`/favourites/`, { data }).then(() => {
-    window.location.reload();
+    // window.location.reload();
+    $(".like_button_wrapper").toggle();
+    $(".dislike_button_wrapper").toggle();
   });
 };
 
@@ -86,7 +109,9 @@ const addFavourite = function () {
 const removeFavourite = function () {
   let resource_id = getPath();
   $.post(`/favourites/${resource_id}/delete`).then(() => {
-    window.location.reload();
+    // window.location.reload();
+    $(".like_button_wrapper").toggle();
+    $(".dislike_button_wrapper").toggle();
   });
 };
 

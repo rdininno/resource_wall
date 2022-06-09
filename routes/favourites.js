@@ -25,6 +25,32 @@ module.exports = (db) => {
       });
   });
 
+  // GET - check like
+  router.get("/:id/like", (req, res) => {
+    const resource_id = req.params.id;
+    let user_id = req.session.user_id;
+    if (typeof req.session.user_id === "undefined") {
+      console.log("no login");
+      return res.send({ user_id: "nologin", resource_id: resource_id });
+    }
+    db.query(
+      `select * from favourites 
+       where user_id = ${user_id}
+      and resource_id = ${resource_id};`
+    )
+      .then((data) => {
+        if (data.rows.length === 0) {
+          console.log("no data");
+          return res.send({ user_id: "usernolike", resource_id: resource_id });
+        }
+        console.log(data.rows);
+        res.send(data.rows);
+      })
+      .catch((err) => {
+        res.status(500).json({ error: err.message });
+      });
+  });
+
   // Post - ADD favourite
   router.post("/", (req, res) => {
     // Check user logged in
