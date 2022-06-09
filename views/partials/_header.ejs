@@ -1,25 +1,25 @@
 <header>
-  <nav class="relative container mx-auto p-6 bg-dark-red rounded-b-lg">
+  <nav class="relative container mx-auto p-6 bg-dark-green rounded-b-lg">
     <div class="flex items-center justify-between">
       <div class="header_logo pt-1 text-white font-bold"><p>RESOURCE WALL</p></div>
       <div class="flex space-x-6">
-        <a href="/" class="bg-cream hover:bg-blue-400 font-bold py-2 px-4 border-b-4 border-dark-cream hover:border-blue-500 rounded">Home</a>
-        <a href="/explore" class="bg-cream hover:bg-blue-400 font-bold py-2 px-4 border-b-4 border-dark-cream hover:border-blue-500 rounded">Explore</a>
+        <a href="/" class="bg-cream hover:bg-light-green font-bold py-2 px-4 border-b-4 border-r-4 border-dark-cream active:border-0 active:bg-light-green hover:border-reg-green rounded">My woods</a>
+        <a href="/explore" class="bg-cream hover:bg-light-green font-bold py-2 px-4 border-b-4 border-r-4 border-dark-cream active:border-0 active:bg-light-green hover:border-reg-green rounded">Explore the forest</a>
         <% if (typeof user !== "undefined") { %>
-        <a href="/resources" class="bg-cream hover:bg-blue-400 font-bold py-2 px-4 border-b-4 border-dark-cream hover:border-blue-500 rounded">Add Resource</a>
+        <a href="/resources" class="bg-cream hover:bg-light-green font-bold py-2 px-4 border-b-4 border-r-4 border-dark-cream active:border-0 active:bg-light-green hover:border-reg-green rounded">Plant a seed</a>
         <% } %>
       </div>
 
   <div class="logCheck">
     <% if (typeof user !== "undefined") { %>
     <p class="text-bold text-white text-l">Logged In As User: <%= user %></p>
-    <button class="logout userButton bg-cream hover:bg-blue-400 font-bold py-2 px-4 border-b-4 border-dark-cream hover:border-blue-500 rounded">Logout</button>
+    <button class="logout userButton bg-cream hover:bg-light-green font-bold py-2 px-4 border-b-4 border-r-4 border-dark-cream active:border-0 active:bg-light-green hover:border-reg-green rounded">Logout</button>
     <% } else { %>
-    <button class="loginButton bg-cream hover:bg-blue-400 font-bold py-2 px-4 border-b-4 border-dark-cream hover:border-blue-500 rounded" style="display: block" >Login</button>
+    <button class="loginButton bg-cream hover:bg-light-green font-bold py-2 px-4 border-b-4 border-r-4 border-dark-cream active:border-0 active:bg-light-green hover:border-reg-green rounded" style="display: block" >Login</button>
     <div class="userLogin" style="display: none">
-      <button id="1" class="userButton bg-cream hover:bg-blue-400 font-bold py-2 px-4 border-b-4 border-dark-cream hover:border-blue-500 rounded" value="1">user1</button>
-      <button id="2" class="userButton bg-cream hover:bg-blue-400 font-bold py-2 px-4 border-b-4 border-dark-cream hover:border-blue-500 rounded" value="2">user2</button>
-      <button id="3" class="userButton bg-cream hover:bg-blue-400 font-bold py-2 px-4 border-b-4 border-dark-cream hover:border-blue-500 rounded" value="3">user3</button>
+      <button id="1" class="userButton bg-cream hover:bg-light-green font-bold py-2 px-4 border-b-4 border-r-4 border-dark-cream active:border-0 active:bg-light-green hover:border-reg-green rounded" value="1">user1</button>
+      <button id="2" class="userButton bg-cream hover:bg-light-green font-bold py-2 px-4 border-b-4 border-r-4 border-dark-cream active:border-0 active:bg-light-green hover:border-reg-green rounded" value="2">user2</button>
+      <button id="3" class="userButton bg-cream hover:bg-light-green font-bold py-2 px-4 border-b-4 border-r-4 border-dark-cream active:border-0 active:bg-light-green hover:border-reg-green rounded" value="3">user3</button>
     </div>
     <% } %>
   </div>
