@@ -5,7 +5,9 @@
       <div class="flex space-x-6">
         <a href="/" class="bg-cream hover:bg-blue-400 font-bold py-2 px-4 border-b-4 border-dark-cream hover:border-blue-500 rounded">Home</a>
         <a href="/explore" class="bg-cream hover:bg-blue-400 font-bold py-2 px-4 border-b-4 border-dark-cream hover:border-blue-500 rounded">Explore</a>
+        <% if (typeof user !== "undefined") { %>
         <a href="/resources" class="bg-cream hover:bg-blue-400 font-bold py-2 px-4 border-b-4 border-dark-cream hover:border-blue-500 rounded">Add Resource</a>
+        <% } %>
       </div>
 
   <div class="logCheck">
