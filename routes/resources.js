@@ -49,7 +49,7 @@ module.exports = (db) => {
   router.post("/", (req, res) => {
     const user_id = req.session.user_id;
     if (typeof user_id === "undefined") {
-      return res.send("User not log in");
+      return res.send("ERROR User not log in");
     }
     const url = req.body.url;
     const title = req.body.title;
@@ -79,7 +79,7 @@ module.exports = (db) => {
   router.post("/:id/delete", (req, res) => {
     const user_id = req.session.user_id;
     if (typeof user_id === "undefined") {
-      res.redirect("/");
+      res.send("ERROR User not log in");
     }
     const resource_id = req.params.id;
     //delete query
@@ -100,6 +100,10 @@ module.exports = (db) => {
 
   // Post Edit resource
   router.post("/:id", (req, res) => {
+    const user_id = req.session.user_id;
+    if (typeof user_id === "undefined") {
+      res.send("ERROR User not log in");
+    }
     const editQuery = `UPDATE resources SET title = $1, description = $2, url = $3 WHERE id = $4 RETURNING *`;
     const editQueryParams = [
       req.body.title,
