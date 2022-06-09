@@ -36,6 +36,7 @@ const checklike = function () {
 };
 
 const showHideEditForm = function () {
+  $('form#review_form').toggle();
   console.log($(".edit_resource_container").children("#edit_resource_form"));
 
   if ($(".edit_resource_container").find("#edit_resource_form").length) {
@@ -216,7 +217,7 @@ const editForm = `<section class="container flex justify-center edit_resource_se
     <label for="tag" class="block mx-2">programming</label>
   </div> <br>
   <div class="flex justify-center">
-  <input type="submit" name="submit" value="submit" class="edit_resource_form-submit bg-brown hover:bg-dark-red font-bold py-2 px-4 mr-2 border-b-4 border-r-4 text-cream border-dark-cream hover:border-reg-red rounded active:border-0 cursor-pointer" ></input>
+  <input type="submit" name="submit" value="submit" class="edit_resource_submit bg-brown hover:bg-dark-red font-bold py-2 px-4 mr-2 border-b-4 border-r-4 text-cream border-dark-cream hover:border-reg-red rounded active:border-0" ></input>
   </div>
   </form>
   <div class="editFormValidation flex justify-center">
