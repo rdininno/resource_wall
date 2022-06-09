@@ -18,7 +18,6 @@ module.exports = (db) => {
   router.get("/:id", (req, res) => {
     const user_id = req.session.user_id;
     const id = req.params.id;
-    //select resources.*, favourites.user_id as user_like from resources left join favourites on resources.id = resource_id where resources.id = 3
     return db
       .query(
         `select user_id as user_like from favourites where resource_id = ${id};`
