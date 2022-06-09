@@ -1,11 +1,3 @@
-// const buttonTemplate = function (id) {
-//   $result = `
-//   <p>Logged In As User: ${id}</p>
-
-//   `;
-//   return $result;
-// };
-
 $(() => {
   $(".loginButton").click(function () {
     $(".loginButton").css("display", "none");
