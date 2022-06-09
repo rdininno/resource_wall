@@ -13,6 +13,10 @@
 
   <script type="text/javascript" src="/scripts/resourcePage.js"></script>
   <script type="text/javascript" src="/scripts/loginbutton.js"></script>
+  <script
+      src="https://kit.fontawesome.com/17f5e217cf.js"
+      crossorigin="anonymous"
+    ></script>
 </head>
 
 
@@ -48,10 +52,22 @@
             </a>
             <h6 class="mx-1 underline">Created at </h6>
             <p class="mx-1">
-              <%= data[0]['created_at'] %>
+              <%function parseDate(input) {
+                let date = Date.parse(input);
+                date = new Date(date);
+                return date.toLocaleString("en-US");
+              }%>
+              <%= parseDate(data[0]['created_at']) %>
             </p>
             </br>
           </div>
+
+        </div>
+        <div class="editFormValidation flex justify-center">
+          <h3 class="text-l text-red-600">Please fill out all fields</h3>
+        </div>
+        <div class="edited_alert">
+          <h6 class="alert">edited!</h6>
         </div>
           </br>
 
@@ -112,7 +128,7 @@
             <div class="comment_wrapper">
               </br>
               <div class="flex justify-around">
-                <input type="text" name="comment" class="commentBoxInput border-2 border-solid rounded border-black"
+                <input type="text" name="comment" class="commentBoxInput border-2 border-solid rounded border-black break-normal"
                   placeholder="comment">
                 <button type="submit"
                   class="submit_comment_button bg-brown hover:bg-dark-red font-bold py-2 px-4 mr-2 border-b-4 border-r-4 text-cream border-dark-cream hover:border-reg-red rounded active:border-0">submit</button>
@@ -122,20 +138,24 @@
 
         </div>
         </div>
-        <section id="comments">
-          <h2 class="comment-title">COMMENTS</h2>
-          <% if (data[0].comment) {%>
-          <% for (let i=data.length - 1; i>= 0; i--) { %>
-            <div class="comment_container">
-              <%= data[i].comment %> -- <%= data[i].rating %> stars
-                  </br>
-                  <p>left by: <%= data[i].name %> on <%= data[i].created_at %>
-                  </p>
-            </div>
-            </br>
-            <% } %>
-            <% } %>
-        </section>
+
+      </section>
+      <div class="flex justify-center text-lg underline">
+        <h2 class="comment-title">COMMENTS</h2>
+      </div>
+      <section id="comments" class="flex justify-center">
+
+        <% if (data[0].comment) {%>
+        <% for (let i=data.length - 1; i>= 0; i--) { %>
+          <div class="comment_container">
+            <%= data[i].comment %> -- <%= data[i].rating %> stars
+                </br>
+                <p>left by: <%= data[i].name %> on <%= parseDate(data[i].created_at) %>
+                </p>
+          </div>
+          </br>
+          <% } %>
+          <% } %>
       </section>
 
 
