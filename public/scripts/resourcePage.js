@@ -28,6 +28,12 @@ showHideEditForm = function () {
   }
 };
 
+function parseDate(input) {
+  let date = Date.parse(input);
+  date = new Date(date);
+  return date.toLocaleString("en-US");
+}
+
 const editResource = (evt) => {
   evt.preventDefault();
   let resourceId = getPath();
@@ -151,7 +157,7 @@ const editForm = `<section class="container flex justify-center edit_resource_se
     <label for="tag" class="block mx-2">programming</label>
   </div> <br>
   <div class="flex justify-center">
-    <input type="submit" name="submit" class="edit_resource_submit bg-reg-red hover:bg-dark-red font-bold py-2 px-4 mr-2 border-b-4 text-cream border-dark-red hover:border-reg-red rounded cursor-pointer" value="submit"></input>
+  <input type="submit" name="submit" class="edit_resource_form-submit bg-brown hover:bg-dark-red font-bold py-2 px-4 mr-2 border-b-4 border-r-4 text-cream border-dark-cream hover:border-reg-red rounded active:border-0 cursor-pointer" value="submit"></input>
   </div>
   </form>
 
