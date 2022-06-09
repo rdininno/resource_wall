@@ -7,10 +7,9 @@ const router = express.Router();
 module.exports = (db) => {
   // GET -  Favourite by user ID(from cookie session)
   router.get("/", (req, res) => {
+    console.log("listen from favourite");
     const id = req.session.user_id;
-    if (typeof user_id === "undefined") {
-      return res.send("Please log in");
-    }
+
     db.query(
       `SELECT * 
     FROM resources 
@@ -18,6 +17,7 @@ module.exports = (db) => {
     WHERE user_id = ${id};`
     )
       .then((data) => {
+        console.log(data);
         return res.send(data.rows);
       })
       .catch((err) => {
