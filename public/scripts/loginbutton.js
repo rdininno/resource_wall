@@ -13,7 +13,7 @@ $(() => {
 
   $(".logout").click(function () {
     $.post("/users/logout").then(() => {
-      location.reload();
+      window.location = `/explore`;
     });
   });
 });
