@@ -17,9 +17,7 @@ module.exports = (db) => {
   // Get - resources with 'id'
   router.get("/:id", (req, res) => {
     const user_id = req.session.user_id;
-    if (typeof user_id === "undefined") {
-      return res.redirect("/");
-    }
+
     const id = req.params.id;
     return db
       .query(
