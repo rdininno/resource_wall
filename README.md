@@ -1,3 +1,5 @@
+# Resource Wall
+
 ## Project Setup
 
 1. Create your own copy of this repo using the `Use This Template` button, ideally using the name of your project. The repo should be marked Public
