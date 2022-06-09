@@ -24,6 +24,7 @@ module.exports = (db) => {
 
   // Post - ADD reviews
   router.post("/", (req, res) => {
+    console.log("whats happening in reviews.js");
     // need to find out how grab data from req
     const user_id = req.params.id;
     const resource_id = req.params.resource_id;
@@ -31,10 +32,11 @@ module.exports = (db) => {
     const rating = req.params.rating;
 
     // insert table
-    db.query(
-      `INSERT INTO reviews (user_id, resource_id, comment, rating)
+    return db
+      .query(
+        `INSERT INTO reviews (user_id, resource_id, comment, rating)
               VALUES (${user_id}, ${resource_id}, ${comment}, ${rating});`
-    )
+      )
       .then((data) => {
         console.log(data.rows);
       })
@@ -60,6 +62,7 @@ module.exports = (db) => {
     )
       .then((data) => {
         console.log("successful insert");
+        res.redirect(`/resources/${resourceId}`);
       })
       .catch((err) => {
         res.status(500).json({ error: err.message });

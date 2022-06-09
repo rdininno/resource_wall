@@ -1,4 +1,5 @@
 $(document).ready(() => {
+  $(".commentValidation").toggle();
   $("#review_form").on("submit", addReview);
 
   // Delete button onclick
@@ -74,6 +75,13 @@ const addReview = function (event) {
   const comment = $(".commentBoxInput").val();
   let $input = $("#review_form :input");
   let tagValue;
+  if (!$("input[type=radio]:checked").length) {
+    $(".commentValidation").toggle();
+    setTimeout(() => {
+      $(".commentValidation").toggle();
+    }, 2000);
+    return null;
+  }
 
   for (const i of $input) {
     if (i.type === "radio") {
@@ -88,7 +96,13 @@ const addReview = function (event) {
     rating: tagValue,
   };
 
-  $.post(`/reviews/${resourceId}`, data);
+  $.post(`/reviews/${resourceId}`, data)
+    .then(() => {
+      location.reload();
+    })
+    .catch((err) => {
+      console.log("error on add review", err);
+    });
 };
 
 // Get URL param
