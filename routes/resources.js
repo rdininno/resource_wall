@@ -26,9 +26,18 @@ module.exports = (db) => {
       .then((data) => {
         let user_like = data.rows;
         return db
-          .query(`select * from resources where id = ${id};`)
+          .query(`SELECT * FROM resources
+          LEFT JOIN reviews ON resource_id = resources.id
+          JOIN users ON creator_id = users.id
+          WHERE resources.id = ${id}
+          OR resources.id IN (
+            SELECT resource_id
+            FROM reviews
+            WHERE resource_id = ${id}
+            );
+          `)
           .then((data) => {
-            const resource = data.rows[0];
+            const resource = data.rows;
 
             templateVars = { data: resource, user: user_id };
             for (const ii of user_like) {
