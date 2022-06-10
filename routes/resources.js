@@ -8,7 +8,7 @@ module.exports = (db) => {
     if (id !== undefined) {
       templateVars = { user: id };
     } else {
-      res.redirect("/explore");
+      return res.redirect("/explore");
     }
     res.render("newResource", templateVars);
   });
