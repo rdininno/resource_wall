@@ -3,7 +3,9 @@
     <div class="flex items-center justify-between">
       <div class="header_logo pt-1 text-white font-bold"><p>WOODS</p></div>
       <div class="flex space-x-6">
+        <% if (typeof user !== "undefined") { %>
         <a href="/" class="bg-brown font-bold py-2 px-4 border-b-4 border-r-4 border-dark-cream active:border-hidden rounded">My woods <i class="fa-brands fa-canadian-maple-leaf text-red-900"></i></a>
+        <%}%>
         <a href="/explore" class="bg-brown font-bold py-2 px-4 border-b-4 border-r-4 border-dark-cream active:border-hidden rounded">Explore the forest <i class="fa-solid fa-compass text-yellow-400"></i></a>
         <% if (typeof user !== "undefined") { %>
         <a href="/resources" class="bg-brown font-bold py-2 px-4 border-b-4 border-r-4 border-dark-cream active:border-hidden rounded">Plant a seed <i class="fa-solid fa-seedling text-light-green"></i></a>
