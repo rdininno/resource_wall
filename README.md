@@ -1,5 +1,10 @@
 # Resource Wall
 
+## Project by Robert Di Ninno, James Ball, Joshua Cheung
+
+A place where user can store and view helpful resources, allow for a quick access to sites.
+Post good stuff.
+
 - User home page - user can see own resources.
   !["User home page"](https://github.com/rdininno/resource_wall/blob/main/doc/Screen%20Shot%202022-06-09%20at%2017.05.11.png?raw=true)
 - User home page - user can see own favourites.
