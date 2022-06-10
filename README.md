@@ -1,17 +1,17 @@
 # Resource Wall
 
-- Desktop w/ back-to-top button
-  !["Desktop w/ back-to-top button"](https://github.com/rdininno/resource_wall/blob/main/doc/Screen%20Shot%202022-06-09%20at%2017.05.11.png?raw=true)
-- Desktop w/ back-to-top button
-  !["Desktop w/ back-to-top button"](https://github.com/rdininno/resource_wall/blob/main/doc/Screen%20Shot%202022-06-09%20at%2017.05.24.png?raw=true)
-- Desktop w/ back-to-top button
-  !["Desktop w/ back-to-top button"](https://github.com/rdininno/resource_wall/blob/main/doc/Screen%20Shot%202022-06-09%20at%2017.07.27.png?raw=true)
-- Desktop w/ back-to-top button
-  !["Desktop w/ back-to-top button"](https://github.com/rdininno/resource_wall/blob/main/doc/Screen%20Shot%202022-06-09%20at%2017.07.41.png?raw=true)
-- Desktop w/ back-to-top button
-  !["Desktop w/ back-to-top button"](https://github.com/rdininno/resource_wall/blob/main/doc/Screen%20Shot%202022-06-09%20at%2017.07.58.png?raw=true)
-- Desktop w/ back-to-top button
-  !["Desktop w/ back-to-top button"](https://github.com/rdininno/resource_wall/blob/main/doc/Screen%20Shot%202022-06-09%20at%2017.10.52.png?raw=true)
+- User home page - user can see own resources.
+  !["User home page"](https://github.com/rdininno/resource_wall/blob/main/doc/Screen%20Shot%202022-06-09%20at%2017.05.11.png?raw=true)
+- User home page - user can see own favourites.
+  !["User home page"](https://github.com/rdininno/resource_wall/blob/main/doc/Screen%20Shot%202022-06-09%20at%2017.05.24.png?raw=true)
+- Detail page of the resource, if user logged in, able like/dislike, user can edit own resource.
+  !["Detail page"](https://github.com/rdininno/resource_wall/blob/main/doc/Screen%20Shot%202022-06-09%20at%2017.07.27.png?raw=true)
+- Create new resource
+  !["Create new resource"](https://github.com/rdininno/resource_wall/blob/main/doc/Screen%20Shot%202022-06-09%20at%2017.07.41.png?raw=true)
+- Edit resource
+  !["Edit resource"](https://github.com/rdininno/resource_wall/blob/main/doc/Screen%20Shot%202022-06-09%20at%2017.07.58.png?raw=true)
+- Search Page, search page can search and filter all resources
+  !["Search Page"](https://github.com/rdininno/resource_wall/blob/main/doc/Screen%20Shot%202022-06-09%20at%2017.10.52.png?raw=true)
 
 ## Project Setup
 
