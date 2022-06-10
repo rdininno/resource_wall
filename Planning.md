@@ -109,3 +109,5 @@ resets the search
 [x] - Redo like button
 
 [x] - Bug - Submit button color same as background resource page
+
+[x] - Bug - need to block route for adding new resource if not logged in
