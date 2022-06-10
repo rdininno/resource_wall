@@ -42,15 +42,11 @@ app.use(
 
 app.use(express.static("public"));
 
-// const widgetsRoutes = require("./routes/widgets");
-// app.use("/api/widgets", widgetsRoutes(db));
-
-// const database = require("./routes/databaseQueries.js");
 const dataRoutes = require("./routes/databaseRoutes.js");
 app.use("/api/explore", dataRoutes(db));
 
 //Routes for Favorites, Resources, Reviews and tags
-// I keep some route in case will need it for the ajax call in future
+
 const usersRoutes = require("./routes/users.js");
 const resourcesRoutes = require("./routes/resources.js");
 const favouritesRoutes = require("./routes/favourites.js");
@@ -61,13 +57,8 @@ const reviews = require("./routes/reviews.js");
 app.use("/explore", explore(db));
 app.use("/users", usersRoutes(db));
 app.use("/resources", resourcesRoutes(db));
-// Need to confirm
 app.use("/favourites", favouritesRoutes(db));
 app.use("/reviews", reviews(db));
-
-// Home page
-// After discuss will move below two route to routes folder
-// Need to make sure what data pass to server and what is the response
 
 // Direct/render to index page
 app.get("/", (req, res) => {
@@ -77,7 +68,7 @@ app.get("/", (req, res) => {
   if (id !== undefined) {
     templateVars = { user: id };
   }
-  console.log("from root page cookie", templateVars.user);
+
   res.render("index", templateVars);
 });
 

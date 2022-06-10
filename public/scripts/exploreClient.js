@@ -6,9 +6,7 @@ $(document).ready(() => {
 });
 
 const goToResource = (evt) => {
-  console.log($(evt.target).closest());
   const resourceId = $(evt.target).closest(".resource_container").attr("id");
-  console.log(resourceId);
   $.get(`/resources/${resourceId}`)
     .then(() => {
       window.location = `/resources/${resourceId}`;

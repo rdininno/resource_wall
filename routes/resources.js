@@ -1,6 +1,3 @@
-// We may need change the req.params to req.session in future
-// Need to connect to tag table
-
 const express = require("express");
 const router = express.Router();
 
@@ -86,7 +83,6 @@ module.exports = (db) => {
         );
       })
       .catch((err) => {
-        console.log(err);
         res.status(500).json({ error: err.message });
       });
   });
@@ -99,14 +95,13 @@ module.exports = (db) => {
     }
     const resource_id = req.params.id;
     //delete query
-    console.log("delete listen");
+
     db.query(
       `DELETE FROM resources
           WHERE id = ${resource_id}
           AND creator_id = ${user_id}`
     )
       .then((data) => {
-        console.log("delete success");
         res.redirect("/users");
       })
       .catch((err) => {

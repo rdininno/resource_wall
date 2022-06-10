@@ -1,5 +1,3 @@
-// We may not need this route
-
 const express = require("express");
 const router = express.Router();
 
@@ -7,15 +5,10 @@ module.exports = (db) => {
   // Get - tag with 'id'
   router.get("/:id", (req, res) => {
     const id = req.params.id;
-    // send res for testing
-    res.send(`hello: id ${id}`);
-    console.log(`hello from Tags: id ${id}`);
 
     db.query(`SELECT * FROM tags WHERE id = ${id};`)
       .then((data) => {
         const tag = data.rows; // will return array of object
-        // res.json({ resources });
-        console.log(tag);
       })
       .catch((err) => {
         res.status(500).json({ error: err.message });
@@ -24,7 +17,6 @@ module.exports = (db) => {
 
   // Post - ADD tag
   router.post("/", (req, res) => {
-    // need to find out how grab data from req
     const user_id = req.params.id;
     const resource_id = req.params.resource_id;
     const tag = req.params.tag;
@@ -35,7 +27,7 @@ module.exports = (db) => {
               VALUES (${user_id}, ${resource_id}, ${tag});`
     )
       .then((data) => {
-        console.log(data.rows);
+        console.log("success");
       })
       .catch((err) => {
         res.status(500).json({ error: err.message });
@@ -58,7 +50,7 @@ module.exports = (db) => {
     WHERE id = ${id};`
     )
       .then((data) => {
-        console.log(data.rows);
+        console.log("success");
       })
       .catch((err) => {
         res.status(500).json({ error: err.message });

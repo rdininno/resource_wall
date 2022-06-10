@@ -33,11 +33,9 @@ const checklike = function () {
 };
 
 const showHideEditForm = function () {
-  $('form#review_form').toggle();
-  console.log($(".edit_resource_container").children("#edit_resource_form"));
+  $("form#review_form").toggle();
 
   if ($(".edit_resource_container").find("#edit_resource_form").length) {
-    console.log(true);
     $("#edit_resource_form").toggle();
     $(".resourceInfo").toggle();
   } else {
@@ -117,9 +115,6 @@ const addReview = function (event) {
   // Work from here
   $.post(`/reviews/${resourceId}`, data)
     .then((res) => {
-      // console.log(true);
-      // console.log("suh dude", res);
-      // console.log(res.value.name);
       $("#comments").append(showComment(res));
       $("#review_form").trigger("reset");
     })

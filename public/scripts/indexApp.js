@@ -12,7 +12,6 @@ const renderResource = function (resources) {
   $(".resource_display_container").empty();
   //loop thought the new data
   for (let resource of resources) {
-    console.log(resource);
     //call function for each
     let result = createResourceElement(resource);
     //add the resource one by one
@@ -76,10 +75,8 @@ const showMyFavourites = function () {
 
 // Go to resource
 const goToResource = (evt) => {
-  // console.log($(evt.target).closest());
   const resourceId = $(evt.target).closest(".resourceInfo").attr("id");
 
-  console.log(resourceId);
   $.get(`/resources/${resourceId}`)
     .then(() => {
       window.location = `/resources/${resourceId}`;

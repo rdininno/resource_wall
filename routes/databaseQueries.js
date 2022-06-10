@@ -44,7 +44,6 @@ module.exports = function (db) {
       return db
         .query(queryString, queryParams)
         .then((res) => {
-          console.log(res.rows);
           return res.rows;
         })
         .catch((err) => {

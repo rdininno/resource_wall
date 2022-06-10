@@ -1,5 +1,3 @@
-// We may not need this route
-
 const express = require("express");
 const router = express.Router();
 
@@ -12,7 +10,7 @@ module.exports = (db) => {
     db.query(`SELECT * FROM reviews WHERE id = ${id};`)
       .then((data) => {
         const tag = data.rows; // will return array of object
-        console.log(tag);
+
         return;
       })
       .catch((err) => {
@@ -22,8 +20,6 @@ module.exports = (db) => {
 
   // Post - ADD reviews
   router.post("/", (req, res) => {
-    console.log("whats happening in reviews.js");
-    // need to find out how grab data from req
     const user_id = req.params.id;
     const resource_id = req.params.resource_id;
     const comment = req.params.comment;
@@ -57,7 +53,6 @@ module.exports = (db) => {
       `INSERT INTO reviews (resource_id, reviewer_id, rating, comment) VALUES ($1, $2, $3, $4) RETURNING *`,
       [resourceId, user_id, rating, comment]
     );
-    console.log(insertQuery.rows[0]);
 
     return db
       .query(
@@ -65,7 +60,7 @@ module.exports = (db) => {
       )
       .then((data) => {
         const value = data.rows[0];
-        console.log(value);
+
         res.json({ value });
       })
       .catch((err) => {
