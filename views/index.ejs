@@ -42,6 +42,13 @@
           class="resource_display_container container flex justify-around flex-wrap"
         ></div>
       </section>
+      <%if (typeof user === "undefined") {%>
+      <div class="flex justify-center">
+        <h1 class="text-3xl underline text-bold text-red-500">
+          Please login to view
+        </h1>
+      </div>
+      <%}%>
     </main>
   </body>
 </html>
